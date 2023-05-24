@@ -41,6 +41,7 @@ local function install_plugins(use)
 
     -- Tree sitter
     use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/playground'
 
     -- Multiple cursors
     use 'mg979/vim-visual-multi'
@@ -64,10 +65,12 @@ local function install_plugins(use)
 
 
     -- LSP
+    use 'armagidon-exception/lrtpc-nvim'
+    use "folke/neodev.nvim"
+    use "folke/neoconf.nvim"
     use "williamboman/mason.nvim"
     use "williamboman/mason-lspconfig.nvim"
     use "neovim/nvim-lspconfig"
-    use "folke/neodev.nvim"
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-buffer"
     use "hrsh7th/cmp-path"
@@ -77,6 +80,7 @@ local function install_plugins(use)
     use "saadparwaiz1/cmp_luasnip"
     use "hrsh7th/cmp-nvim-lua"
     use 'onsails/lspkind.nvim'
+    use "ray-x/lsp_signature.nvim"
 
     -- Autopairs
     use "windwp/nvim-autopairs"
@@ -86,6 +90,12 @@ local function install_plugins(use)
 
     -- Greeter menu
     use 'goolord/alpha-nvim'
+
+    -- WhichKey
+    use "folke/which-key.nvim"
+
+    -- Commentary
+    use 'terrortylor/nvim-comment'
 
     if packer_bootstrap then
         require('packer').sync()

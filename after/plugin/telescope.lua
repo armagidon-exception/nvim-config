@@ -8,6 +8,7 @@ end
 
 
 local actions = require'telescope.actions'
+
 telescope.setup {
     defaults = {
         preview = {
@@ -27,7 +28,7 @@ telescope.setup {
                     end
                     vim.fn.jobstart(
                     {
-                        'catimg', filepath  -- Terminal image viewer command
+                        'catimg', filepath
                     },
                     {on_stdout=send_output, stdout_buffered=true, pty=true})
                 else
@@ -59,28 +60,20 @@ telescope.setup {
         },
     },
     extensions = {
-        file_browser = {
-            theme = "dropdown",
-            path = "%:p:h",
-            hijack_netrw = true,
+        ['ui-select'] = {
+            require'telescope.themes'.get_cursor {}
         }
     },
-    ['ui-select'] = {
-        require'telescope.themes'.get_cursor {}
-    }
 }
 
 
 
-telescope.load_extension 'file_browser'
 telescope.load_extension 'fzf'
 telescope.load_extension 'ui-select'
 
 
 local builtin = require'telescope.builtin'
-local file_browser = telescope.extensions.file_browser
 
-mapper.nmap('<leader>ff', builtin.find_files)
-mapper.nmap('<leader>fb', file_browser.file_browser)
-mapper.nmap('<leader>bfs', builtin.buffers)
-mapper.nmap('<leader>fip', builtin.live_grep)
+mapper.nmap('<leader>ff', builtin.find_files, {}, "Find files")
+mapper.nmap('<leader>bfs', builtin.buffers, {}, 'Open buffers')
+mapper.nmap('<leader>fip', builtin.live_grep, {}, 'Search for text')

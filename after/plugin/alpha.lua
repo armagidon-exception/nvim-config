@@ -41,12 +41,9 @@ local edit_file_button = button('e', 'פֿ  Edit file', '<cmd>')
 
 local actions = require "telescope.actions"
 local action_state = require "telescope.actions.state"
+
 edit_file_button.on_press = function ()
-    local telescope_status, telescope = pcall(require, 'telescope')
-    if not telescope_status then
-        return
-    end
-    local file_browser = telescope.extensions.file_browser
+    local file_explorer = require('utils.file_explorer')
 
     local function run_selection(prompt_bufnr, map)
         actions.select_default:replace_if(function ()
@@ -62,7 +59,16 @@ edit_file_button.on_press = function ()
         return true
     end
 
-    file_browser.file_browser({attach_mappings = run_selection})
+    file_explorer.file_browser(run_selection)
+end
+
+local config_button = button('c', '  Configuration')
+config_button.on_press = function ()
+    local path = '~/.config/nvim/'
+    path = vim.fs.normalize(path)
+    vim.cmd('e ' .. path)
+    vim.fn.chdir(path)
+    vim.notify_once('Configuring...', vim.log.levels.INFO)
 end
 
 
@@ -70,7 +76,7 @@ theme.section.buttons.val = {
     edit_file_button,
     button("SPC f f", "  Find file"),
     button("r", "  Recent"   , "<cmd>Telescope oldfiles<CR>"),
-    button('c', '  Configuration', '<cmd>e ~/.config/nvim/<cr>'),
+    config_button,
     button("q", "  Exit vim", "<cmd>wqa<cr>")
 }
 

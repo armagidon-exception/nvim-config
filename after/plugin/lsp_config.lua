@@ -2,11 +2,13 @@ local mason_status, mason = pcall(require, 'mason')
 local mason_lspconfig_status, mason_lspconfig = pcall(require, 'mason-lspconfig')
 local lspconfig_status, lspconfig = pcall(require, 'lspconfig')
 local cmp_status, cmp = pcall(require, 'cmp')
-local mapper = require'utils.mapping'
 
 if not mason_status or not mason_lspconfig_status or not lspconfig_status or not cmp_status then
     return
 end
+
+local mapper = require'utils.mapping'
+local lsp_util = require('lspconfig.util')
 
 
 vim.opt.completeopt = "menu,menuone,noselect"
@@ -39,6 +41,10 @@ local kindicons = {
     TypeParameter = "",
 }
 
+
+
+
+
 mason.setup({
     ui = {
         icons = {
@@ -50,7 +56,7 @@ mason.setup({
 })
 
 mason_lspconfig.setup {
-    ensure_installed = {'sumneko_lua'},
+    ensure_installed = {'lua_ls'},
     automatic_installation = true,
 }
 
@@ -124,7 +130,6 @@ cmp.setup.cmdline(':', {
 
 
 
-
 local telescope_status, telescope = pcall(require, 'telescope.builtin')
 
 
@@ -138,7 +143,7 @@ local on_attach = function(_, bufnr)
     end
     mapper.nmap('<leader>gd', vim.lsp.buf.declaration, { buffer = bufnr })
     mapper.nmap('<leader>K', vim.lsp.buf.hover, { buffer = bufnr })
-    mapper.nmap('<S-p>', vim.lsp.buf.signature_help, { buffer = bufnr })
+    mapper.nmap('P', vim.lsp.buf.signature_help, { buffer = bufnr })
     mapper.nmap('<leader>rn', vim.lsp.buf.rename, { buffer = bufnr })
     mapper.nmap('<leader>ca', vim.lsp.buf.code_action, { buffer = bufnr })
 
@@ -150,10 +155,17 @@ local on_attach = function(_, bufnr)
     })
 end
 
+local neodev_status, neodev =  pcall(require, 'neodev')
+if neodev_status then
+    neodev.setup()
+end
 
--- Setup Lua with nvim integration
-local neodev = require'neodev'
-neodev.setup()
+
+require('neoconf').setup()
+local lrtpc_status, lrtpc = pcall(require, 'lrtpc')
+if lrtpc_status then
+    lrtpc.setup()
+end
 
 mason_lspconfig.setup_handlers {
     function(server_name)
@@ -164,6 +176,3 @@ mason_lspconfig.setup_handlers {
         }
     end
 }
-
-
-

@@ -114,6 +114,16 @@ _G.packer_plugins = {
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["lrtpc-nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/lrtpc-nvim",
+    url = "https://github.com/armagidon-exception/lrtpc-nvim"
+  },
+  ["lsp_signature.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
+    url = "https://github.com/ray-x/lsp_signature.nvim"
+  },
   ["lspkind.nvim"] = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/lspkind.nvim",
@@ -133,6 +143,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["neoconf.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/neoconf.nvim",
+    url = "https://github.com/folke/neoconf.nvim"
   },
   ["neodev.nvim"] = {
     loaded = true,
@@ -159,6 +174,11 @@ _G.packer_plugins = {
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-cokeline",
     url = "https://github.com/noib3/nvim-cokeline"
   },
+  ["nvim-comment"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-comment",
+    url = "https://github.com/terrortylor/nvim-comment"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -178,6 +198,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
+  },
+  playground = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/playground",
+    url = "https://github.com/nvim-treesitter/playground"
   },
   ["plenary.nvim"] = {
     loaded = true,
@@ -218,6 +243,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
     url = "https://github.com/mg979/vim-visual-multi"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 

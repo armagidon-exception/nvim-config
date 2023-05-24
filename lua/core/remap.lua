@@ -32,3 +32,8 @@ keymap.set('n', '<C-Left>', '<cmd>vertical resize -2<cr>')
 
 keymap.set('v', ">", ">gv")
 keymap.set('v', "<", "<gv")
+keymap.set('n', 'o', 'o<ESC>', opts)
+keymap.set('n', 'O', 'O<ESC>', opts)
+keymap.set('v', 'dd', '"_d')
+keymap.set('n', 'dd', '"_dd')
+
