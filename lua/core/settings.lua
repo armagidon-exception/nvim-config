@@ -38,8 +38,3 @@ opt.wildignore:append { "**/node_modules/*", '**/.git/*' }
 
 opt.completeopt = 'menu,menuone,noselect'
 
-vim.filetype.add({
-    extension = {
-        ejs = 'ejs',
-    }
-})

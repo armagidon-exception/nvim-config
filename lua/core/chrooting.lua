@@ -20,3 +20,15 @@ if not _G.cwd_parent_set then
     set_cwd_from_params()
     _G.cwd_parent_set = true
 end
+
+vim.api.nvim_create_user_command("Root", function ()
+    local file = vim.fn.expand('%')
+    if vim.fn.isdirectory(file) == 1 then
+        vim.fn.chdir(file)
+    elseif vim.fn.filereadable(file) then
+        local parent = vim.fs.dirname(file)
+        vim.fn.chdir(parent)
+    else
+        vim.notify('Cannot cd to non file', vim.log.levels.ERROR)
+    end
+end, {})
