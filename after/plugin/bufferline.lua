@@ -1,42 +1,20 @@
-local bufferline_status, bufferline = pcall(require, 'cokeline')
-local get_hex = require('cokeline/utils').get_hex
-if not bufferline_status then
-    return
-end
+local bufferline = require'utils.importer'.import('bufferline')
+if not bufferline then return end
 
+vim.opt.termguicolors = true
+bufferline.setup {
+    options = {
+        mode = "buffers",
+        diagnostics = "nvim_lsp",
+        color_icons = true,
+        show_close_icon = false,
+        show_buffer_close_icons = false,
+        right_mouse_command = nil,
+        left_mouse_command = nil,
+        diagnostics_indicator = function(count, level)
+            local icon = level:match("error") and " " or ""
+            return " " .. icon .. count
+        end
+    }        
+}
 
-vim.cmd('colorscheme carbonfox')
-bufferline.setup({
-    components = {
-        {
-            text = '',
-            fg = get_hex('ColorColumn', 'bg'),
-            bg = get_hex('Normal', 'bg'),
-        },
-        {
-            text = function(buffer)
-                return buffer.devicon.icon
-            end,
-            fg = function(buffer)
-                return buffer.devicon.color
-            end,
-        },
-        {
-            text = function(buffer) return buffer.filename .. ' ' end,
-        },
-        {
-            text = '',
-            fg = get_hex('ColorColumn', 'bg'),
-            bg = get_hex('Normal', 'bg'),
-        },
-    },
-    default_hl = {
-        fg = function(buffer)
-            return
-            buffer.is_focused
-            and get_hex('Normal', 'fg')
-            or get_hex('Comment', 'fg')
-        end,
-        bg = get_hex('ColorColumn', 'bg'),
-    },
-})

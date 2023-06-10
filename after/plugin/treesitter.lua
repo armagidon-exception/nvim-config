@@ -1,31 +1,25 @@
-local treesitter_status, treesitter = pcall(require, 'nvim-treesitter')
+local treesitter_configs = require 'utils.importer'.import('nvim-treesitter.configs')
+if not treesitter_configs then return end
 
-if not treesitter_status then
-    print("This module requires TreeSitter to be installed")
-    return
-end
-
-local configs = require'nvim-treesitter.configs'
-
-configs.setup {
-    ensure_installed = { "lua" },
-    sync_install = true,
+treesitter_configs.setup {
+    ensure_installed = { "lua", "query" },
     auto_install = true,
-    -- Modules
     highlight = {
+        enabled = true
+    },
+    incremental_selection = {
         enable = true,
+        keymaps = {
+            init_selection = "gnn", -- set to `false` to disable one of the mappings
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm",
+        },
     },
     indent = {
-        enabled = true,
+        enable = true
+    },
+    autotag = {
+        enable = true,
     }
-}
-
-local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.ejs = {
-  install_info = {
-    url = "~/.config/nvim/tree-sitter-ejs/", -- local path or git repo
-    files = { "src/parser.c" }, -- note that some parsers also require src/scanner.c or src/scanner.cc
-    requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
-  },
-  filetype = "ejs",
 }

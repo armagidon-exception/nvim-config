@@ -37,4 +37,10 @@ opt.hidden = true
 opt.wildignore:append { "**/node_modules/*", '**/.git/*' }
 
 opt.completeopt = 'menu,menuone,noselect'
-
+vim.api.nvim_create_autocmd({'BufNewFile','BufRead'}, {
+    pattern = "*",
+    callback = function(_)        
+        print"hi"
+        opt.formatoptions:remove { "c", "r", "o" } 
+    end,
+})

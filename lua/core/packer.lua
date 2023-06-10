@@ -36,66 +36,49 @@ local packer_config = {
 local function install_plugins(use)
     use 'wbthomason/packer.nvim'
 
-    -- Theme
-    use "EdenEast/nightfox.nvim"
-
-    -- Tree sitter
-    use 'nvim-treesitter/nvim-treesitter'
-    use 'nvim-treesitter/playground'
-
-    -- Multiple cursors
-    use 'mg979/vim-visual-multi'
-
-    -- Lualine
+    -- Color scheme
+    use 'folke/tokyonight.nvim'
+    
+    -- Status line
     use 'nvim-lualine/lualine.nvim'
-
+    
     -- Icons
     use 'nvim-tree/nvim-web-devicons'
 
+    -- Projects
+    use "ahmedkhalf/project.nvim"
+
     -- Terminal
-    use 'akinsho/toggleterm.nvim'
+    use "akinsho/toggleterm.nvim"
+
+    -- Greeter
+    use 'goolord/alpha-nvim'
+
+    -- Bufferline
+    use 'akinsho/bufferline.nvim'
 
     -- Telescope
     use 'nvim-telescope/telescope.nvim'
     use 'nvim-lua/plenary.nvim'
-    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+    use "nvim-telescope/telescope-file-browser.nvim"
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
     use 'nvim-telescope/telescope-ui-select.nvim'
-    use 'nvim-telescope/telescope-file-browser.nvim'
     use 'nvim-telescope/telescope-symbols.nvim'
 
+    -- Treesitter
+    use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/playground'
 
-    -- LSP
-    use 'armagidon-exception/lrtpc-nvim'
-    use "folke/neodev.nvim"
-    use "folke/neoconf.nvim"
-    use "williamboman/mason.nvim"
-    use "williamboman/mason-lspconfig.nvim"
-    use "neovim/nvim-lspconfig"
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-cmdline"
-    use "hrsh7th/nvim-cmp"
-    use "L3MON4D3/LuaSnip"
-    use "saadparwaiz1/cmp_luasnip"
-    use "hrsh7th/cmp-nvim-lua"
-    use 'onsails/lspkind.nvim'
-    use "ray-x/lsp_signature.nvim"
-
-    -- Autopairs
-    use "windwp/nvim-autopairs"
-
-    -- Bufferline
-    use 'noib3/nvim-cokeline'
-
-    -- Greeter menu
-    use 'goolord/alpha-nvim'
-
-    -- WhichKey
-    use "folke/which-key.nvim"
-
+    -- Surround
+    use "kylechui/nvim-surround"
+    
     -- Commentary
-    use 'terrortylor/nvim-comment'
+    use "terrortylor/nvim-comment"
+    
+    -- Autopairs
+    
+    -- Autotags
+    use 'windwp/nvim-ts-autotag'
 
     if packer_bootstrap then
         require('packer').sync()

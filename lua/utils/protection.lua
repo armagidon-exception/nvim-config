@@ -7,7 +7,7 @@ function class.pload(loader, name, handler)
 
     local status, _ = pcall(loader, name)
     if not status then 
-        handler(name, status)
+        handler()
     end
 end
 
