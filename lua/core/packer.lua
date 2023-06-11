@@ -71,14 +71,35 @@ local function install_plugins(use)
 
     -- Surround
     use "kylechui/nvim-surround"
-    
     -- Commentary
-    use "terrortylor/nvim-comment"
-    
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use 'numToStr/Comment.nvim'
     -- Autopairs
-    
+ 	use "windwp/nvim-autopairs"
+
     -- Autotags
     use 'windwp/nvim-ts-autotag'
+
+    -- Which key
+    use "folke/which-key.nvim"
+
+    -- LSP
+    use 'neovim/nvim-lspconfig' -- Collection of lsp configs
+    use "williamboman/mason.nvim" -- LSP package manager
+    use "williamboman/mason-lspconfig.nvim" -- Hook for Mason and lsp config
+    use 'hrsh7th/cmp-nvim-lsp' -- Completion
+    use 'hrsh7th/cmp-buffer' -- Completion source for buffer
+    use 'hrsh7th/cmp-path' -- Completion source for file system
+    use 'hrsh7th/cmp-cmdline' -- Completion source for commands
+    use 'hrsh7th/nvim-cmp' --  Completion
+    use 'jose-elias-alvarez/null-ls.nvim' -- hooking into lsp
+    use "jay-babu/mason-null-ls.nvim" -- Bridge for mason and null-ls
+    use 'dcampos/nvim-snippy' -- Snippets
+    use 'dcampos/cmp-snippy' -- Snippets
+    use 'folke/neodev.nvim' -- For neovim docs
+    use "folke/neoconf.nvim" -- Json configuration for lua_ls
+    use "folke/trouble.nvim" -- Pretty diagnostics
+    use "onsails/lspkind.nvim" -- Kind Icons
 
     if packer_bootstrap then
         require('packer').sync()

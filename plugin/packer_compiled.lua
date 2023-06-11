@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Comment.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
   ["alpha-nvim"] = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/alpha-nvim",
@@ -84,15 +89,90 @@ _G.packer_plugins = {
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/cmp-buffer",
+    url = "https://github.com/hrsh7th/cmp-buffer"
+  },
+  ["cmp-cmdline"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
+    url = "https://github.com/hrsh7th/cmp-cmdline"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  ["cmp-path"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/cmp-path",
+    url = "https://github.com/hrsh7th/cmp-path"
+  },
+  ["cmp-snippy"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/cmp-snippy",
+    url = "https://github.com/dcampos/cmp-snippy"
+  },
+  ["lspkind.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/lspkind.nvim",
+    url = "https://github.com/onsails/lspkind.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["nvim-comment"] = {
+  ["mason-lspconfig.nvim"] = {
     loaded = true,
-    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-comment",
-    url = "https://github.com/terrortylor/nvim-comment"
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
+    url = "https://github.com/williamboman/mason-lspconfig.nvim"
+  },
+  ["mason-null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/mason-null-ls.nvim",
+    url = "https://github.com/jay-babu/mason-null-ls.nvim"
+  },
+  ["mason.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/mason.nvim",
+    url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["neoconf.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/neoconf.nvim",
+    url = "https://github.com/folke/neoconf.nvim"
+  },
+  ["neodev.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/neodev.nvim",
+    url = "https://github.com/folke/neodev.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
+  ["nvim-autopairs"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
+    url = "https://github.com/windwp/nvim-autopairs"
+  },
+  ["nvim-cmp"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+    url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-lspconfig"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
+    url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-snippy"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-snippy",
+    url = "https://github.com/dcampos/nvim-snippy"
   },
   ["nvim-surround"] = {
     loaded = true,
@@ -108,6 +188,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
     url = "https://github.com/windwp/nvim-ts-autotag"
+  },
+  ["nvim-ts-context-commentstring"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
+    url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -168,6 +253,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
     url = "https://github.com/folke/tokyonight.nvim"
+  },
+  ["trouble.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/trouble.nvim",
+    url = "https://github.com/folke/trouble.nvim"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 

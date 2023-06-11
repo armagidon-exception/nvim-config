@@ -40,7 +40,9 @@ opt.completeopt = 'menu,menuone,noselect'
 vim.api.nvim_create_autocmd({'BufNewFile','BufRead'}, {
     pattern = "*",
     callback = function(_)        
-        print"hi"
         opt.formatoptions:remove { "c", "r", "o" } 
     end,
 })
+
+--package.path = vim.fn.stdpath("config") .. '/after/plugin/?.lua;' .. package.path
+-- package.path = home_dir .. "/.config/nvim/after/plugin/?.lua;" .. package.path

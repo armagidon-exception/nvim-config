@@ -7,25 +7,29 @@ local load_extension = function(name)
    end)
 end
 
-local actions = require'telescope.actions'
+local telescope_actions = require'telescope.actions'
+local transform_mod = require("telescope.actions.mt").transform_mod
+
+local custom_actions = { }
 
 local default_remaps = {
-    ['<Tab>'] = actions.move_selection_next,
-    ['<S-Tab>'] = actions.move_selection_previous,
-    ['<C-n>'] = function() end,
-    ['<C-p>'] = function() end,
-    ['<Down>'] = actions.toggle_selection + actions.move_selection_next,
-    ['<Up>'] = actions.toggle_selection + actions.move_selection_previous
+    ['<Tab>'] = telescope_actions.move_selection_next,
+    ['<S-Tab>'] = telescope_actions.move_selection_previous,
+    ['<C-n>'] = false,
+    ['<C-p>'] = false,
+    ['<Down>'] = telescope_actions.toggle_selection + telescope_actions.move_selection_worse,
+    ['<Up>'] = telescope_actions.move_selection_better + telescope_actions.toggle_selection
 }
 
-local function open_find_files()
+function custom_actions.open_find_files()
     vim.cmd("Telescope find_files")
 end
 
-local function open_file_browser()
+function custom_actions.open_file_browser()
     vim.cmd("Telescope file_browser")
 end
 
+custom_actions = transform_mod(custom_actions)
 
 telescope.setup {
     defaults = {
@@ -43,10 +47,10 @@ telescope.setup {
             git_status = false,
             mappings = {
                 n = {
-                    F = open_find_files
+                    F = custom_actions.open_find_files,
                 }, 
                 i = {
-                    F = open_find_files
+                    F = custom_actions.open_find_files,
                 }
             }
         },
@@ -55,13 +59,16 @@ telescope.setup {
         },
     },
     pickers = {
+        buffers = {
+            theme = "dropdown"
+        },
         find_files = {
             mappings = {
                 n = {
-                    F = open_file_browser
+                    F = custom_actions.open_file_browser
                 }, 
                 i = {
-                    F = open_file_browser
+                    F = custom_actions.open_file_browser
                 }
             }
         },

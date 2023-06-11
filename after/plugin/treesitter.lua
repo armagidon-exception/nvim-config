@@ -5,14 +5,14 @@ treesitter_configs.setup {
     ensure_installed = { "lua", "query" },
     auto_install = true,
     highlight = {
-        enabled = true
+        enable = true
     },
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = "gnn", -- set to `false` to disable one of the mappings
+            init_selection = "gnn",
             node_incremental = "grn",
-            scope_incremental = "grc",
+            scope_incremental = false,
             node_decremental = "grm",
         },
     },
@@ -21,5 +21,20 @@ treesitter_configs.setup {
     },
     autotag = {
         enable = true,
-    }
+    },
+    context_commentstring = {
+        enable = true,
+    },
+}
+
+
+
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.ejs = {
+    install_info = {
+        url = "~/.config/nvim/local_parsers/tree-sitter-ejs/",
+        files = { "src/parser.c" }, 
+        requires_generate_from_grammar = false, 
+    },
+    filetype = "ejs",
 }

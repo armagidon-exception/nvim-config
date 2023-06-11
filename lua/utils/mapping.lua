@@ -11,12 +11,10 @@ function module.map(mode, key, command, opts, desc)
     opts = opts or {}
     opts = vim.tbl_deep_extend("force", opts, default_opts)
     desc = desc or ''
-    local wk_status, wk = pcall(require, 'which-key')
-    if wk_status then
-        wk.register({
-            [key] = { command, desc }
-        })
-    else
+    local wk = require'utils.importer'.import('which-key')
+    if wk then 
+        wk.register({ [key] = { command, desc } })
+    else 
         keymap.set(mode, key, command, opts)
     end
 end
