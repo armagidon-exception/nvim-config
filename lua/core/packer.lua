@@ -86,6 +86,18 @@ local function install_plugins(use)
     -- Which key
     use "folke/which-key.nvim"
 
+    -- Live Server
+    use "barrett-ruth/live-server.nvim"
+
+    -- Emmet
+    use "mattn/emmet-vim"
+
+    -- TODO comment
+    -- use "folke/todo-comments.nvim"
+
+    -- Hightlight hex color codes
+    use 'norcalli/nvim-colorizer.lua'
+
     -- LSP
     use "neovim/nvim-lspconfig"          -- Collection of lsp configs
     use "williamboman/mason.nvim"        -- LSP package manager
@@ -97,8 +109,9 @@ local function install_plugins(use)
     use "hrsh7th/nvim-cmp"               --  Completion
     use "jose-elias-alvarez/null-ls.nvim" -- hooking into lsp
     use "jay-babu/mason-null-ls.nvim"    -- Bridge for mason and null-ls
-    use "dcampos/nvim-snippy"            -- Snippets
-    use "dcampos/cmp-snippy"             -- Snippets
+    use "L3MON4D3/LuaSnip"               -- Snippets
+    use "rafamadriz/friendly-snippets"   -- Snippet pack
+    use "saadparwaiz1/cmp_luasnip"       -- Integration with cmp
     use "folke/neodev.nvim"              -- For neovim docs
     use "folke/neoconf.nvim"             -- Json configuration for lua_ls
     use "folke/trouble.nvim"             -- Pretty diagnostics
