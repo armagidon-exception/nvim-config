@@ -1,4 +1,4 @@
-local bufferline = require'utils.importer'.import('bufferline')
+local bufferline = require 'bufferline'
 if not bufferline then return end
 
 vim.opt.termguicolors = true
@@ -15,6 +15,5 @@ bufferline.setup {
             local icon = level:match("error") and " " or ""
             return " " .. icon .. count
         end
-    }        
+    }
 }
-

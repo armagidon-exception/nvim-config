@@ -119,10 +119,10 @@ _G.packer_plugins = {
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["emmet-vim"] = {
+  ["formatter.nvim"] = {
     loaded = true,
-    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/emmet-vim",
-    url = "https://github.com/mattn/emmet-vim"
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/formatter.nvim",
+    url = "https://github.com/mhartington/formatter.nvim"
   },
   ["friendly-snippets"] = {
     loaded = true,
@@ -154,11 +154,6 @@ _G.packer_plugins = {
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
-  ["mason-null-ls.nvim"] = {
-    loaded = true,
-    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/mason-null-ls.nvim",
-    url = "https://github.com/jay-babu/mason-null-ls.nvim"
-  },
   ["mason.nvim"] = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/mason.nvim",
@@ -173,11 +168,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/neodev.nvim",
     url = "https://github.com/folke/neodev.nvim"
-  },
-  ["null-ls.nvim"] = {
-    loaded = true,
-    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
-    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,
@@ -214,11 +204,6 @@ _G.packer_plugins = {
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
     url = "https://github.com/windwp/nvim-ts-autotag"
   },
-  ["nvim-ts-context-commentstring"] = {
-    loaded = true,
-    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
-    url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
-  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -244,6 +229,11 @@ _G.packer_plugins = {
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
+  ["rainbow-delimiters.nvim"] = {
+    loaded = true,
+    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/rainbow-delimiters.nvim",
+    url = "https://github.com/hiphish/rainbow-delimiters.nvim"
+  },
   ["telescope-file-browser.nvim"] = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
@@ -268,11 +258,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
-  },
-  ["toggleterm.nvim"] = {
-    loaded = true,
-    path = "/home/armagidon/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
-    url = "https://github.com/akinsho/toggleterm.nvim"
   },
   ["tokyonight.nvim"] = {
     loaded = true,

@@ -1,7 +1,5 @@
 local opt = vim.opt
 local g = vim.g
-
---opt.autochdir = true
 opt.autoread = true
 opt.browsedir = 'buffer'
 opt.clipboard:append({'unnamed', 'unnamedplus'})
@@ -34,15 +32,4 @@ opt.signcolumn = 'yes'
 
 opt.hidden = true
 
-opt.wildignore:append { "**/node_modules/*", '**/.git/*' }
-
-opt.completeopt = 'menu,menuone,noselect'
-vim.api.nvim_create_autocmd({'BufNewFile','BufRead'}, {
-    pattern = "*",
-    callback = function(_)        
-        opt.formatoptions:remove { "c", "r", "o" } 
-    end,
-})
-
---package.path = vim.fn.stdpath("config") .. '/after/plugin/?.lua;' .. package.path
--- package.path = home_dir .. "/.config/nvim/after/plugin/?.lua;" .. package.path
+vim.opt.completeopt:append( { "menu", "menuone", "noselect" } )

@@ -1,5 +1,4 @@
-local lualine = require'utils.importer'.import('lualine')
-if not lualine then return end
+local lualine = require'lualine'
 
 local function fetch_lsp()
     local msg = 'No Active Lsp'
