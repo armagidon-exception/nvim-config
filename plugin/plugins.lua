@@ -88,6 +88,8 @@ local function install_plugins(use)
 	-- Bufferline
 	use "akinsho/bufferline.nvim"
 
+    use "akinsho/toggleterm.nvim"
+
 	-- LSP
 	use "neovim/nvim-lspconfig" -- Collection of lsp configs
 	use "williamboman/mason.nvim" -- LSP package manager
@@ -107,6 +109,11 @@ local function install_plugins(use)
 	use "ray-x/lsp_signature.nvim" -- Method signature
 	use "mhartington/formatter.nvim" -- Formatters
 	use "mfussenegger/nvim-lint" -- Linter
+    use "Decodetalkers/csharpls-extended-lsp.nvim"
+
+    use "MunifTanjim/nui.nvim"
+    use "rcarriga/nvim-notify"
+    use "folke/noice.nvim"
 
 	if packer_bootstrap then
 		require("packer").sync()
