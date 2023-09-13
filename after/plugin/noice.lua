@@ -26,28 +26,22 @@ require("noice").setup {
 		popupmenu = {
 			relative = "editor",
 			position = {
-				row = "50%",
+				row = "70%",
 				col = "50%",
 			},
 			size = {
 				width = 60,
-				height = 10,
+				height = "20%",
 			},
 			border = {
 				style = "rounded",
-				padding = { 0, 1 },
 			},
 			win_options = {
 				winhighlight = { Normal = "Normal", FloatBorder = "DiagnosticInfo" },
 			},
 		},
 	},
-
 	presets = {
-		bottom_search = false,
-		command_palette = true,
 		long_message_to_split = true,
-		inc_rename = false,
-		lsp_doc_border = false,
 	},
 }

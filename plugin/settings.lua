@@ -10,6 +10,7 @@ opt.fileencoding = 'utf-8'
 opt.mouse = 'a'
 opt.number = true
 opt.relativenumber = true
+opt.autoindent = true
 
 opt.guicursor = ""
 

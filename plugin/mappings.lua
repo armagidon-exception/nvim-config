@@ -35,3 +35,5 @@ map("n","o","o<ESC>")
 map("n","O","O<ESC>")
 map("v","dd",'"_d')
 map("n","dd",'"_dd')
+
+map("i", "jk", "<esc>")

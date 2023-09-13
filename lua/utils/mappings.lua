@@ -4,7 +4,7 @@
 ---@param mode string | table<string>
 ---@param mapping string
 ---@param command string | function
----@param opts table
+---@param opts table?
 local map = function(mode, mapping, command, opts)
 	opts = opts or {}
 	local keymap = vim.keymap
