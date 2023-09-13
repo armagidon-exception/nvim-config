@@ -23,6 +23,15 @@ telescope.setup {
 		},
         buffers = {
             theme = "dropdown"
+        },
+        find_files = {
+            mappings = {
+                n = {
+                    ['<leader>sh'] = function ()
+                        builtin.find_files { hidden = true }
+                    end
+                }
+            }
         }
 	},
 	extensions = {
