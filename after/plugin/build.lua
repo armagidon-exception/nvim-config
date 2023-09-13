@@ -35,6 +35,7 @@ vim.api.nvim_create_user_command("Run", function()
 		dir = root_dir,
         on_close = function (term)
             vim.fn.chanclose(term.job_id)
-        end
+        end,
+        close_on_exit = false,
 	}):toggle()
 end, { desc = "Runs run config for given filetype" })
