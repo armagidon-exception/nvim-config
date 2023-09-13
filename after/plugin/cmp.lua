@@ -18,7 +18,8 @@ cmp.setup({
         }),
     },
     window = {
-
+        completion = cmp.config.window.bordered('rounded'),
+        documentation = cmp.config.window.bordered('rounded')
     },
     experimental = {
         ghost_text = true,
@@ -30,22 +31,5 @@ cmp.setup({
         { name = 'buffer' },
         { name = "path" },
     }),
+
 })
-
-
---[[ cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = 'buffer' }
-    }
-})
-
-
-cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-            { name = 'cmdline' }
-        })
-}) ]]
