@@ -88,7 +88,7 @@ local function install_plugins(use)
 	-- Bufferline
 	use "akinsho/bufferline.nvim"
 
-    use "akinsho/toggleterm.nvim"
+	use "akinsho/toggleterm.nvim"
 
 	-- LSP
 	use "neovim/nvim-lspconfig" -- Collection of lsp configs
@@ -98,7 +98,8 @@ local function install_plugins(use)
 	use "hrsh7th/cmp-buffer" -- Completion source for buffer
 	use "hrsh7th/cmp-path" -- Completion source for file system
 	use "hrsh7th/cmp-cmdline" -- Completion source for commands
-	use "hrsh7th/nvim-cmp" --  Completion
+	--use "hrsh7th/nvim-cmp" --  Completion
+	use "yioneko/nvim-cmp" -- Completion optimized
 	use "L3MON4D3/LuaSnip" -- Snippets
 	use "rafamadriz/friendly-snippets" -- Snippet pack
 	use "saadparwaiz1/cmp_luasnip" -- Integration with cmp
@@ -109,11 +110,11 @@ local function install_plugins(use)
 	use "ray-x/lsp_signature.nvim" -- Method signature
 	use "mhartington/formatter.nvim" -- Formatters
 	use "mfussenegger/nvim-lint" -- Linter
-    use "Decodetalkers/csharpls-extended-lsp.nvim"
+	use "Decodetalkers/csharpls-extended-lsp.nvim"
 
-    use "MunifTanjim/nui.nvim"
-    use "rcarriga/nvim-notify"
-    use "folke/noice.nvim"
+	use "MunifTanjim/nui.nvim"
+	use "rcarriga/nvim-notify"
+	use "folke/noice.nvim"
 
 	if packer_bootstrap then
 		require("packer").sync()
