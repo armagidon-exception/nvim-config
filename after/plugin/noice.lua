@@ -12,6 +12,23 @@ require("noice").setup {
 	health = {
 		checker = true,
 	},
+	cmdline = {
+		format = {
+			IncRename = {
+				pattern = "^:%s*IncRename%s+",
+				icon = " ",
+				conceal = true,
+				opts = {
+					relative = "cursor",
+					size = { min_width = 20 },
+					position = {
+                        col = 0,
+                        row = -3
+                    },
+				},
+			},
+		},
+	},
 	views = {
 		cmdline_popup = {
 			position = {

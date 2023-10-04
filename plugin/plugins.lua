@@ -111,6 +111,7 @@ local function install_plugins(use)
 	use "mhartington/formatter.nvim" -- Formatters
 	use "mfussenegger/nvim-lint" -- Linter
 	use "Decodetalkers/csharpls-extended-lsp.nvim"
+    use "smjonas/inc-rename.nvim" -- Incremental renaming
 
 	use "MunifTanjim/nui.nvim"
 	use "rcarriga/nvim-notify"
