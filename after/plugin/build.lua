@@ -5,10 +5,6 @@ local run_cmds = {
 		cmd = "dotnet run",
 		src_dir_patterns = { ".git", "*.csproj" },
 	},
-    lua = {
-        cmd = "lua %",
-        src_dir_patterns = { ".git", ".luarc.json" }
-    }
 }
 
 local build_cmds = {}

@@ -1,6 +1,6 @@
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 require("which-key").setup {
-    marks = false,
-    registers = false
+	marks = false,
+	registers = false,
 }

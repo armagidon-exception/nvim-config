@@ -5,7 +5,7 @@ local themes = require'telescope.themes'
 
 project_nvim.setup({
     detection_methods = {'pattern', 'lsp'},
-    manual_mode = true,
+    manual_mode = false,
     scope_chdir = "tab"
 })
 

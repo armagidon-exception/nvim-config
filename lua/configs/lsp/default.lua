@@ -1,7 +1,7 @@
 local map = require "utils.mappings"
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local tele_builtin = require "telescope.builtin"
-local lsp_signature = require "lsp_signature"
+--[[ local lsp_signature = require "lsp_signature" ]]
 
 local settings = {
 	lsp_settings = {
@@ -16,21 +16,22 @@ local function merge(...)
 	return vim.tbl_deep_extend("force", ...)
 end
 
-function settings.lsp_settings.on_attach(server_name, bufnr)
+function settings.lsp_settings.on_attach(_, bufnr)
 	local opts = { buffer = bufnr }
 	map("n", "gD", vim.lsp.buf.declaration, merge(opts, { desc = "Show declaration" }))
 	map("n", "gd", tele_builtin.lsp_definitions, merge(opts, { desc = "Show definitions" }))
 	map("n", "K", vim.lsp.buf.hover, merge(opts, { desc = "Show lsp info" }))
 	map("n", "gi", tele_builtin.lsp_implementations, merge(opts, { desc = "Show implemetation" }))
-	map("n", "<C-k>", vim.lsp.buf.signature_help, merge(opts, { desc = "Signature help" }))
+	map("n", "<leader>k", vim.lsp.buf.signature_help, merge(opts, { desc = "Signature help" }))
 	map("n", "<leader>D", tele_builtin.lsp_type_definitions, merge(opts, { desc = "Show type definitions" }))
 	map("n", "<leader>rn", ":IncRename ", merge(opts, { desc = "Rename" }))
-	map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, merge(opts, { desc = "Show code actions" }))
+	map({ "n", "v" }, "<leader>ca", require'actions-preview'.code_actions, merge(opts, { desc = "Show code actions" }))
+--[[ 	map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, merge(opts, { desc = "Show code actions" })) ]]
 	map("n", "<leader>ref", tele_builtin.lsp_references, merge(opts, { desc = "Show references" }))
 	map("n", "<leader>lf", "<cmd>Format<cr>", merge(opts, { desc = "Format" }))
 	map("n", "<leader>di", tele_builtin.diagnostics, merge(opts, { desc = "Show diagnostics" }))
 
-	lsp_signature.on_attach({
+	--[[ lsp_signature.on_attach({
 		bind = true,
 		handler_opts = {
 			border = "none",
@@ -54,7 +55,7 @@ function settings.lsp_settings.on_attach(server_name, bufnr)
 			end
 			return 0
 		end,
-	}, bufnr)
+	}, bufnr) ]]
 end
 
 local cmp = require "cmp"
