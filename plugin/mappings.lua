@@ -31,8 +31,10 @@ map("n","<C-Left>","<cmd>vertical resize -2<cr>")
 
 map("v",">",">gv")
 map("v","<","<gv")
-map("n","o","o<ESC>")
-map("n","O","O<ESC>")
+--[[ map("n","o","o<ESC>")
+map("n","O","O<ESC>") ]]
+map("n", "o", "oa<BS><ESC>")
+map("n", "O", "Oa<BS><ESC>")
 map("v","dd",'"_d')
 map("n","dd",'"_dd')
 
