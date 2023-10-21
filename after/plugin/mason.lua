@@ -25,6 +25,8 @@ mason_lsp.setup {
     handlers = {
         function(server_name)
             lspconfig[server_name].setup(lsp_cfgs.get_handler(server_name))
+        end,
+        jdtls = function ()
         end
     }
 }

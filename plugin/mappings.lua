@@ -13,8 +13,8 @@ map("n","<leader>x","<cmd>!chmod +x %<CR>")
 
 map("n","<A-q>",vim.cmd.bdelete)
 map("n","<A-e>","<cmd>q<cr>")
-map("n","<A-h>","<cmd>bp<cr>")
-map("n","<A-l>","<cmd>bn<cr>")
+map("n","<A-h>","<cmd>BufferLineCyclePrev<cr>")
+map("n","<A-l>","<cmd>BufferLineCycleNext<cr>")
 map("n", "<C-Enter>", "<cmd>vsplit<cr>")
 map("n", "<C-S-Enter>", "<cmd>split<cr>")
 
