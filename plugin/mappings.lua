@@ -38,4 +38,4 @@ map("n", "O", "Oa<BS><ESC>")
 map("v","dd",'"_d')
 map("n","dd",'"_dd')
 
-map("i", "jk", "<esc>")
+map("i", "<A-0>", "<esc>l")
