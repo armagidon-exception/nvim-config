@@ -1,7 +1,7 @@
 local map = require "utils.mappings"
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local tele_builtin = require "telescope.builtin"
---[[ local lsp_signature = require "lsp_signature" ]]
+
 
 local settings = {
 	lsp_settings = {
@@ -26,36 +26,9 @@ function settings.lsp_settings.on_attach(_, bufnr)
 	map("n", "<leader>D", tele_builtin.lsp_type_definitions, merge(opts, { desc = "Show type definitions" }))
 	map("n", "<leader>rn", ":IncRename ", merge(opts, { desc = "Rename" }))
 	map({ "n", "v" }, "<leader>ca", require'actions-preview'.code_actions, merge(opts, { desc = "Show code actions" }))
---[[ 	map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, merge(opts, { desc = "Show code actions" })) ]]
 	map("n", "<leader>ref", tele_builtin.lsp_references, merge(opts, { desc = "Show references" }))
 	map("n", "<leader>lf", "<cmd>Format<cr>", merge(opts, { desc = "Format" }))
 	map("n", "<leader>di", tele_builtin.diagnostics, merge(opts, { desc = "Show diagnostics" }))
-
-	--[[ lsp_signature.on_attach({
-		bind = true,
-		handler_opts = {
-			border = "none",
-		},
-		hint_prefix = "🤖 ",
-		select_signature_key = "<M-n>",
-		floating_window_off_x = 5, -- adjust float windows x position.
-		floating_window_off_y = function() -- adjust float windows y position. e.g. set to -2 can make floating window move up 2 lines
-			local pumheight = vim.o.pumheight
-			local winline = vim.fn.winline() -- line number in the window
-			local winheight = vim.fn.winheight(0)
-
-			-- window top
-			if winline - 1 < pumheight then
-				return pumheight
-			end
-
-			-- window bottom
-			if winheight - winline < pumheight then
-				return -pumheight
-			end
-			return 0
-		end,
-	}, bufnr) ]]
 end
 
 local cmp = require "cmp"
@@ -78,7 +51,7 @@ end, { "i" })
 settings.cmp.mappings = merge(settings.cmp.mappings, {
 	["<C-b>"] = cmp.mapping.scroll_docs(-4),
 	["<C-f>"] = cmp.mapping.scroll_docs(4),
-	["<C-Space>"] = cmp.mapping.complete(),
+	["<C-Space>"] = cmp.mapping.complete({}),
 	["<C-e>"] = cmp.mapping.abort(),
 	["<CR>"] = cmp.mapping.confirm { select = true },
 })

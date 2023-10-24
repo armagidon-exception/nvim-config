@@ -27,7 +27,10 @@ lualine.setup {
         lualine_a = {'mode'},
         lualine_b = {'branch', 'diff', 'diagnostics'},
         lualine_c = {'filename', {fetch_lsp, icon = ' LSP:'}},
-        lualine_x = {'encoding', 'fileformat', 'filetype'},
+        lualine_x = {'encoding', 'fileformat', 'filetype', {
+            require('noice').api.status.mode.get,
+            cond = require('noice').api.status.mode.has,
+        }},
         lualine_y = {'progress'},
         lualine_z = {'location'}
     },

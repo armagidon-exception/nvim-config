@@ -22,12 +22,20 @@ require("noice").setup {
 					relative = "cursor",
 					size = { min_width = 20 },
 					position = {
-                        col = 0,
-                        row = -3
-                    },
+						col = 0,
+						row = -3,
+					},
 				},
 			},
 		},
+	},
+	messages = {
+		enabled = true,
+		view = "notify", -- default view for messages
+		view_error = "notify", -- view for errors
+		view_warn = "notify", -- view for warnings
+		view_history = "messages", -- view for :messages
+		view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
 	},
 	views = {
 		cmdline_popup = {

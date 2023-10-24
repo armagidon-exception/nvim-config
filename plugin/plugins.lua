@@ -61,6 +61,7 @@ local function install_plugins(use)
 	use "nvim-treesitter/nvim-treesitter"
 	use "nvim-treesitter/playground"
 	use "windwp/nvim-ts-autotag"
+    use "nvim-treesitter/nvim-treesitter-textobjects"
 
 	use "hiphish/rainbow-delimiters.nvim"
 
@@ -113,10 +114,13 @@ local function install_plugins(use)
 	use "Decodetalkers/csharpls-extended-lsp.nvim"
 	use "smjonas/inc-rename.nvim" -- Incremental renaming
 	use "aznhe21/actions-preview.nvim" -- Code actions menu
+    use "mfussenegger/nvim-jdtls" -- Adapter plugin for jdtls
 
+	-- UI
 	use "MunifTanjim/nui.nvim"
 	use "rcarriga/nvim-notify"
 	use "folke/noice.nvim"
+
 
 	if packer_bootstrap then
 		require("packer").sync()
