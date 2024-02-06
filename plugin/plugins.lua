@@ -35,7 +35,7 @@ local packer_config = {
 local function install_plugins(use)
 	use "wbthomason/packer.nvim"
 
-	use "folke/tokyonight.nvim"
+    use "catppuccin/nvim"
 
 	-- Telescope stuff
 	use "nvim-telescope/telescope.nvim"
@@ -99,8 +99,8 @@ local function install_plugins(use)
 	use "hrsh7th/cmp-buffer" -- Completion source for buffer
 	use "hrsh7th/cmp-path" -- Completion source for file system
 	use "hrsh7th/cmp-cmdline" -- Completion source for commands
-	--use "hrsh7th/nvim-cmp" --  Completion
-	use "yioneko/nvim-cmp" -- Completion optimized
+	use "hrsh7th/nvim-cmp" --  Completion
+	--use "yioneko/nvim-cmp" -- Completion optimized
 	use "L3MON4D3/LuaSnip" -- Snippets
 	use "rafamadriz/friendly-snippets" -- Snippet pack
 	use "saadparwaiz1/cmp_luasnip" -- Integration with cmp
@@ -109,7 +109,8 @@ local function install_plugins(use)
 	use "folke/trouble.nvim" -- Pretty diagnostics
 	use "onsails/lspkind.nvim" -- Kind Icons
 	use "ray-x/lsp_signature.nvim" -- Method signature
-	use "mhartington/formatter.nvim" -- Formatters
+	-- use "mhartington/formatter.nvim" -- Formatters
+    use "stevearc/conform.nvim" -- Formatters
 	use "mfussenegger/nvim-lint" -- Linter
 	use "Decodetalkers/csharpls-extended-lsp.nvim"
 	use "smjonas/inc-rename.nvim" -- Incremental renaming

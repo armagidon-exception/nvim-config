@@ -1,18 +1,50 @@
-require("formatter").setup {
-	logging = true,
-	log_level = vim.log.levels.WARN,
-	filetype = {
-		lua = {
-			require("formatter.filetypes.lua").stylua,
+local formatter = require "conform"
+
+require("conform").setup {
+	formatters_by_ft = {
+		lua = { "stylua" },
+		cs = { "clangformat" },
+		python = { "autopep8" },
+		java = { "clangformat" },
+		tex = { "latexindent" },
+		c = { "clangformat" },
+		cpp = { "clangformat" },
+		css = { "prettier" },
+		html = { "prettier" },
+		javascript = { "prettier" },
+		typescript = { "prettier" },
+		json = { "prettier" },
+		yaml = { "prettier" },
+		["_"] = { "trim_whitespace" },
+	},
+	formatters = {
+		stylua = {
+			prepend_args = { "--quote-style", "ForceDouble", "--call-parentheses", "None" },
 		},
-		cs = {
-			require("formatter.filetypes.cs").clangformat,
+		latexindent = {
+			prettier = {
+				"-m",
+				"--yaml=\"oneSentencePerLine:manipulateSentences:1\"",
+			},
 		},
-		python = {
-			require("formatter.filetypes.python").black,
-		},
-		["*"] = {
-			require("formatter.filetypes.any").remove_trailing_whitespace,
+	},
+}
+
+local mapper = require "utils.mappings"
+
+mapper.create_mappings {
+	{
+		mode = { "n", "v" },
+		keys = "<leader>lf",
+		command = function()
+			formatter.format {
+				lsp_fallback = true,
+				async = false,
+				timeout_ms = 500,
+			}
+		end,
+		opts = {
+			desc = "Format",
 		},
 	},
 }

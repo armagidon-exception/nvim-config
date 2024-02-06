@@ -10,12 +10,29 @@ require("toggleterm").setup {
 	direction = "float",
 	on_open = function(terminal)
 		local buf = terminal.bufnr
-		map("t", "<esc>", "<c-\\><c-n>", { buffer = buf })
-		map("n", "q", function()
-			terminal:toggle()
-		end, { buffer = buf })
-		map("t", "<c-\\>", function()
-			terminal:toggle()
-		end, { buffer = buf })
+		map.create_mappings {
+			{
+				mode = "t",
+				keys = "<esc>",
+				command = "<c-\\><c-n>",
+				opts = { buffer = buf },
+			},
+			{
+				mode = "n",
+				keys = "q",
+				command = function()
+					terminal:toggle()
+				end,
+				opts = { buffer = buf },
+			},
+			{
+				mode = "t",
+				keys = "<c-\\>",
+				command = function()
+					terminal:toggle()
+				end,
+				opts = { buffer = buf },
+			},
+		}
 	end,
 }

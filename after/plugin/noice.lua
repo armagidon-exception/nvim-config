@@ -1,4 +1,18 @@
+local notify = require "notify"
+notify.setup {
+	timeout = 10000,
+}
+
 require("noice").setup {
+	routes = {
+		{
+			filter = {
+				event = "notify",
+				find = "No information available",
+			},
+			opts = { skip = true },
+		},
+	},
 	lsp = {
 		override = {
 			["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -68,5 +82,6 @@ require("noice").setup {
 	},
 	presets = {
 		long_message_to_split = true,
+		lsp_doc_border = true,
 	},
 }

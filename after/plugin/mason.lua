@@ -1,7 +1,5 @@
 local mason = require'mason'
 local mason_lsp = require'mason-lspconfig'
-local lsp_cfgs = require'configs.lsp'
-local lspconfig = require'lspconfig'
 
 mason.setup {
     ui = {
@@ -17,6 +15,7 @@ mason.setup {
     },
 }
 
+require'neoconf'.setup()
 require("neodev").setup()
 
 mason_lsp.setup {
@@ -24,7 +23,7 @@ mason_lsp.setup {
     automatic_installation = true,
     handlers = {
         function(server_name)
-            lspconfig[server_name].setup(lsp_cfgs.get_handler(server_name))
+            require("configs.lsp").setup_server(server_name)
         end,
         jdtls = function ()
         end

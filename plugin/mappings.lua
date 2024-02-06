@@ -1,41 +1,167 @@
-local map = require'utils.mappings'
+local g = vim.g
+g.mapleader = " "
+g.maplocalleader = " "
+local mapper = require "utils.mappings"
 
-map("n","i","<Insert>")
-map("v","J",":m '>+1<CR>gv=gv")
-map("v","K",":m '<-2<CR>gv=gv")
+mapper.create_mappings {
+	{
+		mode = "n",
+		keys = "i",
+		command = "<Insert>",
+	},
+	{
+		mode = "v",
+		keys = "J",
+		command = ":m '>+1<CR>gv=gv'",
+	},
+	{
 
---map("n","J","mzJ`z")
-map("n","<C-d>","<C-d>zz")
-map("n","<C-u>","<C-u>zz")
---map("n","n","nzzzv")
---map("n","N","Nzzzv")
-map("n","<leader>x","<cmd>!chmod +x %<CR>")
+		mode = "v",
+		keys = "J",
+		command = ":m '<-2<CR>gv=gv'",
+	},
+	{
+		mode = "n",
+		keys = "<C-d>",
+		command = "<C-d>zz",
+	},
+	{
+		mode = "n",
+		keys = "<C-u>",
+		command = "<C-u>zz",
+	},
+	{
+		mode = "n",
+		keys = "<leader>x",
+		command = "<cmd>!chmod +x %<CR>",
+		opts = { silent = false },
+	},
+	{
+		mode = "n",
+		keys = "<A-q>",
+		command = vim.cmd.tabclose,
+		opts = { desc = "Close tab" },
+	},
+	{
+		mode = "n",
+		keys = "<A-e>",
+		command = vim.cmd.q,
+		opts = { desc = "Close window" },
+	},
+	{
+		mode = "n",
+		keys = "<A-h>",
+		command = vim.cmd.bprevious,
+		opts = { desc = "Go to previous buffer" },
+	},
+	{
+		mode = "n",
+		keys = "<A-l>",
+		command = vim.cmd.bnext,
+		opts = { desc = "Go to next buffer" },
+	},
+	{
+		mode = "n",
+		keys = "<Tab>",
+		command = vim.cmd.tabnext,
+		opts = { desc = "Go to next tab" },
+	},
+	{
+		mode = "n",
+		keys = "<S-Tab>",
+		command = vim.cmd.tabprevious,
+		opts = { desc = "Go to previous tab" },
+	},
+	{
+		mode = "n",
+		keys = "<leader>nt",
+		command = vim.cmd.tabnew,
+		opts = { silent = false, desc = "Create new tab" },
+	},
+	{
+		mode = "n",
+		keys = "<leader>bd",
+		command = vim.cmd.bdelete,
+		opts = { silent = false, desc = "Delete buffer" },
+	},
+	{
+		mode = "n",
+		keys = "<C-Enter>",
+		command = vim.cmd.vsplit,
+		opts = { desc = "Open window in vertical split" },
+	},
+	{
+		mode = "n",
+		keys = "<C-S-Enter>",
+		command = vim.cmd.split,
+		opts = { desc = "Open window in horizontal split" },
+	},
+	{
+		mode = "n",
+		keys = "<C-h>",
+		command = "<C-w>h",
+	},
+	{
+		mode = "n",
+		keys = "<C-j>",
+		command = "<C-w>j",
+	},
+	{
+		mode = "n",
+		keys = "<C-k>",
+		command = "<C-w>k",
+	},
+	{
+		mode = "n",
+		keys = "<C-l>",
+		command = "<C-w>l",
+	},
 
-map("n","<A-q>",vim.cmd.bdelete)
-map("n","<A-e>","<cmd>q<cr>")
-map("n","<A-h>","<cmd>BufferLineCyclePrev<cr>")
-map("n","<A-l>","<cmd>BufferLineCycleNext<cr>")
-map("n", "<C-Enter>", "<cmd>vsplit<cr>")
-map("n", "<C-S-Enter>", "<cmd>split<cr>")
+	{
+		mode = "n",
+		keys = "<C-Up>",
+		command = "<cmd>resize +2<cr>",
+	},
+	{
+		mode = "n",
+		keys = "<C-Down>",
+		command = "<cmd>resize -2<cr>",
+	},
 
-map("n","<C-h>","<C-w>h")
-map("n","<C-j>","<C-w>j")
-map("n","<C-k>","<C-w>k")
-map("n","<C-l>","<C-w>l")
+	{
+		mode = "n",
+		keys = "<C-Right>",
+		command = "<cmd>vertical resize +2<cr>",
+	},
+	{
+		mode = "n",
+		keys = "<C-Left>",
+		command = "<cmd>vertical resize -2<cr>",
+	},
 
-map("n","<C-Up>","<cmd>resize +2<cr>")
-map("n","<C-Down>","<cmd>resize -2<cr>")
-
-map("n","<C-Right>","<cmd>vertical resize +2<cr>")
-map("n","<C-Left>","<cmd>vertical resize -2<cr>")
-
-map("v",">",">gv")
-map("v","<","<gv")
---[[ map("n","o","o<ESC>")
-map("n","O","O<ESC>") ]]
-map("n", "o", "oa<BS><ESC>")
-map("n", "O", "Oa<BS><ESC>")
-map("v","dd",'"_d')
-map("n","dd",'"_dd')
-
-map("i", "<A-0>", "<esc>l")
+	{
+		mode = "v",
+		keys = ">",
+		command = ">gv",
+	},
+	{
+		mode = "v",
+		keys = "<",
+		command = "<gv",
+	},
+	{
+		mode = "n",
+		keys = "o",
+		command = "oa<BS><ESC>",
+	},
+	{
+		mode = "n",
+		keys = "O",
+		command = "Oa<BS><ESC>",
+	},
+	{
+		mode = "i",
+		keys = "<A-0>",
+		command = "<esc>l",
+	},
+}

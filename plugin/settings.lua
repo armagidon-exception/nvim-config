@@ -28,7 +28,6 @@ opt.incsearch = true
 opt.termguicolors = true
 opt.scrolloff = 10
 opt.updatetime = 50
-g.mapleader = " "
 opt.signcolumn = 'yes'
 
 opt.hidden = true
