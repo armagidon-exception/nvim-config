@@ -4,21 +4,23 @@ g.maplocalleader = " "
 local mapper = require "utils.mappings"
 
 mapper.create_mappings {
-	{
-		mode = "n",
-		keys = "i",
-		command = "<Insert>",
-	},
+    {
+        mode = "n",
+        keys = "i",
+        command = "<Insert>",
+    },
 	{
 		mode = "v",
 		keys = "J",
-		command = ":m '>+1<CR>gv=gv'",
+		command = ":m '>+1<CR>gv=gv",
+		opts = { silent = true },
 	},
 	{
 
 		mode = "v",
-		keys = "J",
-		command = ":m '<-2<CR>gv=gv'",
+		keys = "K",
+		command = ":m '<-2<CR>gv=gv",
+		opts = { silent = true },
 	},
 	{
 		mode = "n",
