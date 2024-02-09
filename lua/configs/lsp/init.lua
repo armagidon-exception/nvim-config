@@ -13,103 +13,8 @@ local function get_settings(server_name)
 	end
 end
 
-local function default_mappings(bufnr)
-	return {
-		{
-			mode = "n",
-			keys = "gD",
-			command = vim.lsp.buf.declaration,
-			opts = {
-				desc = "Show declaration",
-				buffer = bufnr,
-			},
-		},
-		{
-			mode = "n",
-			keys = "gd",
-			command = tele_builtin.lsp_definitions,
-			opts = {
-				desc = "Show definitions",
-				buffer = bufnr,
-			},
-		},
-		{
-			mode = "n",
-			keys = "K",
-			command = vim.lsp.buf.hover,
-			opts = {
-				desc = "Show lsp info",
-				buffer = bufnr,
-			},
-		},
-		{
-			mode = "n",
-			keys = "gi",
-			command = tele_builtin.lsp_implementations,
-			opts = {
-				desc = "Show implemetation",
-				buffer = bufnr,
-			},
-		},
-		{
-			mode = "n",
-			keys = "<leader>k",
-			command = vim.lsp.buf.signature_help,
-			opts = {
-				desc = "Signature help",
-				buffer = bufnr,
-			},
-		},
-		{
-			mode = "n",
-			keys = "<leader>D",
-			command = tele_builtin.lsp_type_definitions,
-			opts = {
-				desc = "Show type definitions",
-				buffer = bufnr,
-			},
-		},
-		{
-			mode = "n",
-			keys = "<leader>rn",
-			command = ":IncRename",
-			opts = {
-				desc = "Rename",
-				buffer = bufnr,
-			},
-		},
-		{
-			mode = { "n", "v" },
-			keys = "<leader>ca",
-			command = require("actions-preview").code_actions,
-			opts = {
-				desc = "Show code actions",
-				buffer = bufnr,
-			},
-		},
-		{
-			mode = "n",
-			keys = "<leader>ref",
-			command = tele_builtin.lsp_references,
-			opts = {
-				desc = "Show lsp references",
-				buffer = bufnr,
-			},
-		},
-		{
-			mode = "n",
-			keys = "<leader>di",
-			command = tele_builtin.diagnostics,
-			opts = {
-				desc = "Show diagnostics",
-				buffer = bufnr,
-			},
-		},
-	}
-end
-
 local function default_on_attach(server_name, bufnr)
-	local mappings = default_mappings(bufnr)
+	local mappings = require('configs.lsp.mappings')(bufnr)
 	local server_settings = get_settings(server_name)
 	if server_settings then
 		if server_settings.mappings then
@@ -117,16 +22,19 @@ local function default_on_attach(server_name, bufnr)
 		end
 	end
 
-	mapper.create_mappings(server_settings)
+	mapper.create_mappings(mappings)
 end
 
 M.setup_server = function(server_name)
 	local server_settings = get_settings(server_name)
 	lspconfig[server_name].setup {
 		capabilities = require("cmp_nvim_lsp").default_capabilities(),
-		on_attach = default_on_attach,
-		settings = server_settings and server_settings.settings or {},
-		handlers = server_settings and server_settings.handlers or {},
+		on_attach = function (client, bufnr)
+		  default_on_attach(server_name, bufnr)
+		end,
+		settings = server_settings and server_settings.settings,
+		handlers = server_settings and server_settings.handlers,
+        autostart = server_settings and server_settings.autostart
 	}
 end
 

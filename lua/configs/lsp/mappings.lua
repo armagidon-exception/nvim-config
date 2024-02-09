@@ -1,11 +1,6 @@
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local tele_builtin = require "telescope.builtin"
 
-local settings = {
-	capabilities = capabilities,
-}
-
-function settings.mappings(bufnr)
+return function(bufnr)
 	return {
 		{
 			mode = "n",
@@ -99,5 +94,3 @@ function settings.mappings(bufnr)
 		},
 	}
 end
-
-return settings
