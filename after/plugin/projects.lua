@@ -10,9 +10,11 @@ project_nvim.setup {
 }
 
 mapper.create_mappings {
-	mode = "n",
-	keys = "<leader>prjs",
-	command = function()
-		telescope.extensions.projects.projects(themes.get_dropdown {})
-	end,
+    {
+        mode = "n",
+        keys = "<leader>prjs",
+        command = function()
+            telescope.extensions.projects.projects(themes.get_dropdown {})
+        end,
+    },
 }

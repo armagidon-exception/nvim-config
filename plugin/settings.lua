@@ -22,6 +22,8 @@ opt.smartindent = true
 opt.wrap = false
 opt.backup = false
 opt.swapfile = false
+g.mapleader = " "
+g.maplocalleader = " "
 
 opt.hlsearch = false
 opt.incsearch = true

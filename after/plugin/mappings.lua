@@ -1,6 +1,3 @@
-local g = vim.g
-g.mapleader = " "
-g.maplocalleader = " "
 local mapper = require "utils.mappings"
 
 mapper.create_mappings {
