@@ -32,9 +32,9 @@ M.setup_server = function(server_name)
 		on_attach = function (client, bufnr)
 		  default_on_attach(server_name, bufnr)
 		end,
-		settings = server_settings and server_settings.settings,
-		handlers = server_settings and server_settings.handlers,
-        autostart = server_settings and server_settings.autostart
+		settings = server_settings and server_settings.settings or {},
+		handlers = server_settings and server_settings.handlers or {},
+        autostart = server_settings and server_settings.autostart or true
 	}
 end
 
