@@ -59,7 +59,7 @@ return function(bufnr)
 		{
 			mode = "n",
 			keys = "<leader>rn",
-			command = ":IncRename",
+			command = ":IncRename ",
 			opts = {
 				desc = "Rename",
 				buffer = bufnr,
