@@ -15,6 +15,7 @@ require("conform").setup {
 		typescript = { "prettier" },
 		json = { "prettier" },
 		yaml = { "prettier" },
+		markdown = { "prettier" },
 		["_"] = { "trim_whitespace" },
 	},
 	formatters = {
@@ -37,11 +38,18 @@ mapper.create_mappings {
 		mode = { "n", "v" },
 		keys = "<leader>lf",
 		command = function()
-			formatter.format {
+			formatter.format({
 				lsp_fallback = true,
 				async = false,
 				timeout_ms = 500,
-			}
+			}, function(err, did_edit)
+				if did_edit then
+					vim.notify "Formatting completed!"
+				end
+				if err then
+					vim.notify(tostring(err), vim.log.levels.ERROR)
+				end
+			end)
 		end,
 		opts = {
 			desc = "Format",
