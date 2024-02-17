@@ -1,54 +1,49 @@
 local Terminal = require("toggleterm.terminal").Terminal
 
-local run_cmds = {
-	cs = {
-		cmd = "dotnet run",
-	},
-}
+local function compact_vars(vars)
+	local tmp = {}
+	for k, v in pairs(vars) do
+		table.insert(tmp, string.format("export %s=\"%s\"", k, tostring(v)))
+	end
 
-local build_cmds = {}
+	return table.concat(tmp, " && ")
+end
 
-vim.api.nvim_create_user_command("Run", function()
-	local ft = vim.bo.filetype
-	local config = run_cmds[ft]
-	if not config then
-		vim.notify("This filetype does not have run config", vim.log.levels.WARN)
+local function execute(filetype, configs)
+	local run_config = configs[filetype]
+	if run_config == nil then
 		return
 	end
 
+	local command = run_config
+	if type(command) == "function" then
+		command = command()
+	elseif type(command) ~= "table" then
+		return
+	end
+
+	local vars = {
+		FILE = vim.fn.expand "%:p",
+	}
+
+	local final_cmd = table.concat(command, " ")
+	local variables = compact_vars(vars)
+
 	Terminal:new({
-		cmd = "time " .. vim.fn.expand(config.cmd),
+		cmd = variables .. " && " .. final_cmd,
 		on_close = function(term)
 			vim.fn.chanclose(term.job_id)
 		end,
-		close_on_exit = false,
+		close_on_exit = true,
 	}):toggle()
+end
+
+vim.api.nvim_create_user_command("Run", function()
+	local ft = vim.bo.filetype
+	execute(ft, require "configs.building.runconfig")
 end, { desc = "Runs run config for given filetype" })
 
 vim.api.nvim_create_user_command("Build", function()
 	local ft = vim.bo.filetype
-	local config = build_cmds[ft]
-	if not config then
-		vim.notify("This filetype does not have run config", vim.log.levels.WARN)
-		return
-	elseif type(config) == "function" then
-		config = config()
-	end
-
-	Terminal:new({
-		cmd = vim.fn.expand(config.cmd),
-		on_close = function(term)
-			vim.fn.chanclose(term.job_id)
-		end,
-		close_on_exit = false,
-	}):toggle()
+	execute(ft, require "configs.building.buildconfig")
 end, { desc = "Builds from config for given filetype" })
-
-build_cmds.markdown = function()
-	local buf = vim.api.nvim_get_current_buf()
-	local name = vim.api.nvim_buf_get_name(buf)
-	local base, _ = name:gsub("(.*)%.pdf$", "%1.pdf")
-	return {
-		cmd = string.format("pandoc \"%s\" -o \"%s\".pdf --from markdown+pipe_tables", name, base),
-	}
-end
