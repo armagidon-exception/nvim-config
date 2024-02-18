@@ -34,7 +34,7 @@ local function execute(filetype, configs)
 		on_close = function(term)
 			vim.fn.chanclose(term.job_id)
 		end,
-		close_on_exit = true,
+		close_on_exit = false,
 	}):toggle()
 end
 
