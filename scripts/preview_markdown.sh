@@ -5,12 +5,14 @@ if [ -z "$1" ]; then
 fi
 INPUT_FILE="$1"
 OUTPUT_FILE=$(mktemp -u)
-FONT="JetBrains Mono"
+MAIN_FONT="Noto Sans"
+MONO_FONT="Iosevka Semibold Italic"
 
 pandoc --from markdown+pipe_tables \
 --pdf-engine=xelatex \
 -V geometry:margin=1cm \
--V mainfont="$FONT" \
+-V mainfont="$MAIN_FONT" \
+-V monofont="$MONO_FONT" \
 -i "$INPUT_FILE" \
 -t pdf \
 -o "$OUTPUT_FILE" || exit
