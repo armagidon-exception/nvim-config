@@ -50,6 +50,7 @@ telescope.setup {
 			hijack_netrw = true,
 			cwd_to_path = true,
 			prompt_path = true,
+            path = "%:p:h",
 			mappings = {
 				n = {
 					F = telescope_extras.find_in_directory,

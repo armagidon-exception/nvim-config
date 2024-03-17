@@ -1,5 +1,5 @@
 return {
-	markdown = { "sh", vim.fn.stdpath "config" .. "/scripts/build_markdown.sh", "$FILE" },
+	markdown = { "sh", vim.fn.stdpath "config" .. "/scripts/build_markdown.sh", "\"$FILE\"" },
 	c = function()
 		local buf = vim.api.nvim_get_current_buf()
 		local clients = vim.lsp.get_active_clients { bufnr = buf }
