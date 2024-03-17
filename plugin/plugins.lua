@@ -35,7 +35,7 @@ local packer_config = {
 local function install_plugins(use)
 	use "wbthomason/packer.nvim"
 
-    use "catppuccin/nvim"
+	use "catppuccin/nvim"
 
 	-- Telescope stuff
 	use "nvim-telescope/telescope.nvim"
@@ -110,7 +110,7 @@ local function install_plugins(use)
 	use "onsails/lspkind.nvim" -- Kind Icons
 	use "ray-x/lsp_signature.nvim" -- Method signature
 	-- use "mhartington/formatter.nvim" -- Formatters
-    use "stevearc/conform.nvim" -- Formatters
+	use "stevearc/conform.nvim" -- Formatters
 	use "mfussenegger/nvim-lint" -- Linter
 	use "Decodetalkers/csharpls-extended-lsp.nvim"
 	use "smjonas/inc-rename.nvim" -- Incremental renaming

@@ -1,11 +1,11 @@
 local mapper = require "utils.mappings"
 
 mapper.create_mappings {
-    {
-        mode = "n",
-        keys = "i",
-        command = "<Insert>",
-    },
+	{
+		mode = "n",
+		keys = "i",
+		command = "<Insert>",
+	},
 	{
 		mode = "v",
 		keys = "J",
@@ -148,16 +148,16 @@ mapper.create_mappings {
 		keys = "<",
 		command = "<gv",
 	},
-	{
-		mode = "n",
-		keys = "o",
-		command = "oa<BS><ESC>",
-	},
-	{
-		mode = "n",
-		keys = "O",
-		command = "Oa<BS><ESC>",
-	},
+	-- {
+	-- 	mode = "n",
+	-- 	keys = "o",
+	-- 	command = "oa<BS><ESC>",
+	-- },
+	-- {
+	-- 	mode = "n",
+	-- 	keys = "O",
+	-- 	command = "Oa<BS><ESC>",
+	-- },
 	{
 		mode = "i",
 		keys = "<A-0>",
