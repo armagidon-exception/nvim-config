@@ -1,7 +1,7 @@
 local opt = vim.opt
 local g = vim.g
 opt.autoread = true
---opt.bsdir = 'buffer'
+opt.bsdir = "buffer"
 opt.clipboard:append { "unnamed", "unnamedplus" }
 opt.cursorcolumn = true
 opt.cursorline = true
@@ -11,6 +11,11 @@ opt.mouse = "a"
 opt.number = true
 opt.relativenumber = true
 opt.autoindent = true
+g.have_nerd_font = true
+opt.showmode = false
+
+opt.list = true
+opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 opt.guicursor = ""
 
@@ -18,7 +23,7 @@ opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
 
-opt.smartindent = true
+opt.smartindent = false
 opt.wrap = false
 opt.backup = false
 opt.swapfile = false
