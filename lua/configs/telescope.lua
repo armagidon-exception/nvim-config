@@ -49,4 +49,14 @@ extras.mime_hook = function(filepath, bufnr, opts)
 	end
 end
 
+extras.select_prev = function(promptnr)
+	t_actions.toggle_selection(promptnr)
+	t_actions.move_selection_previous(promptnr)
+end
+
+extras.select_next = function(promptnr)
+	t_actions.toggle_selection(promptnr)
+	t_actions.move_selection_next(promptnr)
+end
+
 return extras

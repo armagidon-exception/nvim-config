@@ -9,8 +9,8 @@ local default_mappings = {
 		["<Tab>"] = t_actions.move_selection_next,
 		["<S-Tab>"] = t_actions.move_selection_previous,
 		["="] = t_actions.toggle_selection,
-		["<S-Up>"] = t_actions.toggle_selection + t_actions.move_selection_previous,
-		["<S-Down>"] = t_actions.toggle_selection + t_actions.move_selection_next,
+		["K"] = telescope_extras.select_prev,
+		["J"] = telescope_extras.select_next,
 		["<Up>"] = t_actions.nop,
 		["<Down>"] = t_actions.nop,
 		["q"] = t_actions.close,
@@ -67,6 +67,7 @@ telescope.setup {
 telescope.load_extension "fzf"
 telescope.load_extension "projects"
 telescope.load_extension "file_browser"
+telescope.load_extension "noice"
 
 keymaps.create_mappings {
 	{
