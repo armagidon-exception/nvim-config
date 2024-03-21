@@ -22,10 +22,14 @@ local default_mappings = {
 
 telescope.setup {
 	defaults = {
+        file_ignore_patterns = { "node_modules" },
 		mappings = {
 			i = default_mappings.insert,
 			n = default_mappings.normal,
 		},
+        preview = {
+            mime_hook = telescope_extras.mime_hook
+        }
 	},
 	pickers = {
 		symbols = {
