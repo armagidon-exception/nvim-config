@@ -67,3 +67,22 @@ ts_configs.setup {
 		},
 	},
 }
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.html_ejs = {
+	install_info = {
+		url = "https://github.com/armagidon-exception/tree-sitter-html-ejs.git",
+		files = { "src/parser.c", "src/scanner.cc" },
+		requires_generate_from_grammar = true,
+	},
+	filetype = "html_ejs",
+}
+
+parser_config.ejs = {
+	install_info = {
+		url = "https://github.com/armagidon-exception/tree-sitter-ejs.git",
+		files = { "src/parser.c" },
+		requires_generate_from_grammar = true,
+	},
+}

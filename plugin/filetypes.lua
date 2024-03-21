@@ -3,3 +3,9 @@ vim.filetype.add {
 		h = "c",
 	},
 }
+
+vim.filetype.add {
+	extension = {
+		ejs = "html_ejs",
+	},
+}
