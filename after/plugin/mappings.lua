@@ -38,7 +38,7 @@ mapper.create_mappings {
 	{
 		mode = "n",
 		keys = "<A-q>",
-		command = vim.cmd.tabclose,
+		command = vim.cmd.bdelete,
 		opts = { desc = "Close tab" },
 	},
 	{
@@ -49,39 +49,15 @@ mapper.create_mappings {
 	},
 	{
 		mode = "n",
-		keys = "<A-h>",
-		command = vim.cmd.bprevious,
-		opts = { desc = "Go to previous buffer" },
-	},
-	{
-		mode = "n",
-		keys = "<A-l>",
-		command = vim.cmd.bnext,
-		opts = { desc = "Go to next buffer" },
-	},
-	{
-		mode = "n",
 		keys = "<Tab>",
-		command = vim.cmd.tabnext,
+		command = vim.cmd.bnext,
 		opts = { desc = "Go to next tab" },
 	},
 	{
 		mode = "n",
 		keys = "<S-Tab>",
-		command = vim.cmd.tabprevious,
+		command = vim.cmd.bprevious,
 		opts = { desc = "Go to previous tab" },
-	},
-	{
-		mode = "n",
-		keys = "<leader>nt",
-		command = vim.cmd.tabnew,
-		opts = { silent = false, desc = "Create new tab" },
-	},
-	{
-		mode = "n",
-		keys = "<leader>bd",
-		command = vim.cmd.bdelete,
-		opts = { silent = false, desc = "Delete buffer" },
 	},
 	{
 		mode = "n",

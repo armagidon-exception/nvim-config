@@ -7,7 +7,7 @@ vim.opt.termguicolors = true
 
 bufferline.setup {
 	options = {
-		mode = "tabs",
+		mode = "buffers",
 		diagnostics = "nvim_lsp",
 		color_icons = true,
 		show_close_icon = false,
