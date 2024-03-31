@@ -68,6 +68,8 @@ ts_configs.setup {
 	},
 }
 
+vim.treesitter.language.register('c_sharp', 'mono-cs')
+
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
 parser_config.html_ejs = {
@@ -86,3 +88,4 @@ parser_config.ejs = {
 		requires_generate_from_grammar = true,
 	},
 }
+

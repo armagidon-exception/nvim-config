@@ -7,7 +7,7 @@ local M = {}
 local function get_settings(server_name)
 	local status, settings = pcall(require, "configs.lsp.servers." .. server_name)
 	if not status then
-		return false
+		return nil
 	else
 		return settings
 	end
@@ -26,16 +26,19 @@ local function default_on_attach(server_name, bufnr)
 end
 
 M.setup_server = function(server_name)
+    local defaults = lspconfig[server_name]
 	local server_settings = get_settings(server_name)
-	lspconfig[server_name].setup {
-		capabilities = require("cmp_nvim_lsp").default_capabilities(),
-		on_attach = function (client, bufnr)
-		  default_on_attach(server_name, bufnr)
-		end,
-		settings = server_settings and server_settings.settings or {},
-		handlers = server_settings and server_settings.handlers or {},
-        autostart = server_settings and server_settings.autostart or true
-	}
+    if not server_settings then
+        server_settings = {}
+    end
+
+    server_settings.capabilities = require("cmp_nvim_lsp").default_capabilities()
+    server_settings.on_attach = function (client, bufnr)
+        default_on_attach(server_name, bufnr)
+    end
+
+    local settings = vim.tbl_extend("force", defaults, server_settings)
+	lspconfig[server_name].setup (settings)
 end
 
 return M
