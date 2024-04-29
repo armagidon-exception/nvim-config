@@ -23,7 +23,7 @@ opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
 
-opt.smartindent = false
+opt.smartindent = true
 opt.wrap = false
 opt.backup = false
 opt.swapfile = false
@@ -37,7 +37,10 @@ opt.scrolloff = 10
 opt.updatetime = 50
 opt.signcolumn = "yes"
 
+opt.backspace = { "eol", "start", "indent" }
+
 opt.hidden = true
+opt.path:append { "**" }
 
 vim.opt.completeopt:append { "menu", "menuone", "noselect" }
 
