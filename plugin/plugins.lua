@@ -124,6 +124,8 @@ local function install_plugins(use)
 
     use 'michaelrommel/nvim-silicon'
 
+    use "tpope/vim-fugitive"
+
 	if packer_bootstrap then
 		require("packer").sync()
 	end
