@@ -122,6 +122,8 @@ local function install_plugins(use)
 	use "rcarriga/nvim-notify"
 	use "folke/noice.nvim"
 
+    use 'michaelrommel/nvim-silicon'
+
 	if packer_bootstrap then
 		require("packer").sync()
 	end
