@@ -59,7 +59,6 @@ local function install_plugins(use)
 
 	-- Treesitter
 	use "nvim-treesitter/nvim-treesitter"
-	use "nvim-treesitter/playground"
 	use "windwp/nvim-ts-autotag"
 	use "nvim-treesitter/nvim-treesitter-textobjects"
 
@@ -108,7 +107,6 @@ local function install_plugins(use)
 	use "folke/neoconf.nvim" -- Json configuration for lua_ls
 	use "folke/trouble.nvim" -- Pretty diagnostics
 	use "onsails/lspkind.nvim" -- Kind Icons
-	use "ray-x/lsp_signature.nvim" -- Method signature
 	-- use "mhartington/formatter.nvim" -- Formatters
 	use "stevearc/conform.nvim" -- Formatters
 	use "mfussenegger/nvim-lint" -- Linter
