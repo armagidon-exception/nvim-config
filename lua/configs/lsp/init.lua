@@ -36,7 +36,7 @@ M.setup_server = function(server_name)
 		default_on_attach(server_name, bufnr)
 	end
 
-	local root_dir = server_settings.root_dir
+	local root_dir = defaults.document_config.default_config.root_dir
 	if root_dir == nil then
 		server_settings.root_dir = function(filename, bufnr)
             local dir = vim.fn.getcwd()
