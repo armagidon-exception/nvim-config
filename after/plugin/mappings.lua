@@ -139,4 +139,15 @@ mapper.create_mappings {
 		keys = "<A-0>",
 		command = "<esc>l",
 	},
+    {
+        mode = "n",
+        keys = "<leader>r",
+        command = function ()
+            local filename = vim.fn.expand('%:p:h')
+            if vim.fn.isdirectory(filename) == 1 then
+                vim.cmd.lcd(filename)
+                vim.notify("Root folder has been set to " .. filename)
+            end
+        end
+    }
 }
