@@ -24,6 +24,28 @@ local function default_on_attach(server_name, bufnr)
 	mapper.create_mappings(mappings)
 end
 
+M.setup_config = function()
+	local signs = {
+		Error = { text = "" },
+		Warn = { text = "" },
+		Info = { text = "" },
+		Hint = { text = "󰌶" },
+	}
+	for diag, sign in pairs(signs) do
+		vim.fn.sign_define("DiagnosticSign" .. diag, {
+			text = sign.text or "",
+			texthl = sign.texthl or ("DiagnosticSign" .. diag),
+			linehl = sign.linehl or "",
+			numhl = sign.numhl or ("DiagnosticSign" .. diag),
+		})
+	end
+    vim.diagnostic.config {
+        virtual_text = false,
+        underline = true,
+        serverity_sort = true,
+    }
+end
+
 M.setup_server = function(server_name)
 	local defaults = lspconfig[server_name]
 	local server_settings = get_settings(server_name)
@@ -39,23 +61,23 @@ M.setup_server = function(server_name)
 	local root_dir = defaults.document_config.default_config.root_dir
 	if root_dir == nil then
 		server_settings.root_dir = function(filename, bufnr)
-            local dir = vim.fn.getcwd()
-            if vim.fn.isdirectory(dir) == 1 then
-                return dir
-            end
-        end
-    else
-        server_settings.root_dir = function(filename, bufnr)
-            local root = root_dir(filename)
-            if root ~= nil then
-                return root
-            end
-            local dir = vim.fn.getcwd()
-            if vim.fn.isdirectory(dir) == 1 then
-                return dir
-            end
-        end
-    end
+			local dir = vim.fn.getcwd()
+			if vim.fn.isdirectory(dir) == 1 then
+				return dir
+			end
+		end
+	else
+		server_settings.root_dir = function(filename, bufnr)
+			local root = root_dir(filename)
+			if root ~= nil then
+				return root
+			end
+			local dir = vim.fn.getcwd()
+			if vim.fn.isdirectory(dir) == 1 then
+				return dir
+			end
+		end
+	end
 
 	local settings = vim.tbl_extend("force", defaults, server_settings)
 	lspconfig[server_name].setup(settings)

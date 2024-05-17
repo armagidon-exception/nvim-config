@@ -14,7 +14,7 @@ bufferline.setup {
 		show_buffer_close_icons = false,
 		right_mouse_command = nil,
 		left_mouse_command = nil,
-		diagnostics_update_in_insert = true,
+		diagnostics_update_in_insert = false,
 		themable = true,
 		diagnostics_indicator = function(count, level)
 			local icon = level:match "error" and " " or ""

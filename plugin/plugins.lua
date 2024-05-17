@@ -120,9 +120,11 @@ local function install_plugins(use)
 	use "rcarriga/nvim-notify"
 	use "folke/noice.nvim"
 
-    use 'michaelrommel/nvim-silicon'
+	use "michaelrommel/nvim-silicon"
 
-    use "tpope/vim-fugitive"
+	use "tpope/vim-fugitive"
+
+	use "lervag/vimtex"
 
 	if packer_bootstrap then
 		require("packer").sync()
