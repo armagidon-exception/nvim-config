@@ -108,7 +108,7 @@ local function install_plugins(use)
 	use "folke/trouble.nvim" -- Pretty diagnostics
 	use "onsails/lspkind.nvim" -- Kind Icons
 	-- use "mhartington/formatter.nvim" -- Formatters
-	use "stevearc/conform.nvim" -- Formatters
+	use "stevearc/conform.nvim" -- Formattersplugi
 	use "mfussenegger/nvim-lint" -- Linter
 	use "Decodetalkers/csharpls-extended-lsp.nvim"
 	use "smjonas/inc-rename.nvim" -- Incremental renaming
@@ -123,8 +123,6 @@ local function install_plugins(use)
 	use "michaelrommel/nvim-silicon"
 
 	use "tpope/vim-fugitive"
-
-	use "lervag/vimtex"
 
 	if packer_bootstrap then
 		require("packer").sync()
