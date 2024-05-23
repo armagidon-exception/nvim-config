@@ -39,4 +39,8 @@ return {
 	tex = {
 		cmd = { "pdflatex", "\"$FILE\"" },
 	},
+
+	cs = {
+		cmd = { "dotnet", "msbuild" },
+	},
 }

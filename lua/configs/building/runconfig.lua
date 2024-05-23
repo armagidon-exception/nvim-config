@@ -38,5 +38,8 @@ return {
 
     tex = {
         cmd = { "pdflatex", "\"$FILE\"", "&&", "xreader", "\"$(filename $FILE).pdf\""}
+    },
+    cs = {
+        cmd = { "dotnet", "run" }
     }
 }
