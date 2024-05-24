@@ -1,8 +1,8 @@
 vim.api.nvim_create_user_command("LatexView", function()
-    local file = vim.fn.expand "%"
+    local file = vim.fn.expand "%:r"
 	vim.cmd.Compile()
 	local enter_code = vim.api.nvim_replace_termcodes(
-		string.format("<cmd>!xreader $(filename %s).pdf &<cr>", file),
+		string.format("<cmd>!xreader %s.pdf &<cr>", file),
 		false,
 		false,
 		true
