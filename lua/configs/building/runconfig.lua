@@ -1,4 +1,7 @@
 return {
+    python = {
+        cmd = {"python", "${FILE}"}
+    },
 	markdown = {
 		cmd = { "sh", string.format("%s/scripts/preview_markdown.sh", vim.fn.stdpath "config"), "\"$FILE\"" },
 	},

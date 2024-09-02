@@ -1,7 +1,10 @@
 local telescope = require "telescope"
 local t_actions = require "telescope.actions"
 local builtin = require "telescope.builtin"
+local stream = require "utils.stream"
 local extras = {}
+
+extras.defaults = {}
 
 function extras.find_hidden_files()
 	builtin.find_files { hidden = true }
@@ -29,9 +32,8 @@ end
 extras.mime_hook = function(filepath, bufnr, opts)
 	local is_image = function(filepath)
 		local image_extensions = { "png", "jpg" } -- Supported image formats
-		local split_path = vim.split(filepath:lower(), ".", { plain = true })
-		local extension = split_path[#split_path]
-		return vim.tbl_contains(image_extensions, extension)
+		local ext = vim.fn.fnamemodify(filepath, ":e")
+		return vim.tbl_contains(image_extensions, ext)
 	end
 	if is_image(filepath) then
 		local term = vim.api.nvim_open_term(bufnr, {})
@@ -50,13 +52,53 @@ extras.mime_hook = function(filepath, bufnr, opts)
 end
 
 extras.select_prev = function(promptnr)
-	t_actions.toggle_selection(promptnr)
-	t_actions.move_selection_previous(promptnr)
+    t_actions.toggle_selection(promptnr)
+    t_actions.move_selection_previous(promptnr)
 end
 
 extras.select_next = function(promptnr)
 	t_actions.toggle_selection(promptnr)
 	t_actions.move_selection_next(promptnr)
+end
+
+extras.execute_shell_command = function(promptnr)
+	local action_state = require "telescope.actions.state"
+	local picker = action_state.get_current_picker(promptnr)
+	local finder = picker.finder
+	local cwd = finder.path or error "This finder does not support command execution"
+	local input = vim.fn.input { prompt = "Enter command: " }
+
+	if #input == 0 then
+		return
+	end
+
+	local function reload()
+		picker:refresh(finder, { reset_prompt = true })
+	end
+
+	local paths = stream.table_map(picker:get_multi_selection(), function(val)
+        return val[1]
+	end)
+
+    local TELESCOPE_SELECTION = table.concat(paths, ' ')
+
+	vim.fn.jobstart(input, {
+        env = {
+            TELESCOPE_SELECTION = TELESCOPE_SELECTION,
+        },
+		cwd = cwd,
+		detach = 0,
+		on_stdout = function(n, stdout)
+			vim.notify(table.concat(stdout, "\n"), vim.log.INFO)
+			reload()
+		end,
+		on_stderr = function(id, stderr)
+			vim.notify(table.concat(stderr, "\n"), vim.log.ERROR)
+			reload()
+		end,
+		stdout_buffered = true,
+		stderr_buffered = true,
+	})
 end
 
 return extras

@@ -1,7 +1,8 @@
 local opt = vim.opt
 local g = vim.g
 opt.autoread = true
-opt.bsdir = "buffer"
+-- opt.browsedir = "buffer"
+-- opt.bsdir = "buffer"
 opt.clipboard:append { "unnamed", "unnamedplus" }
 opt.cursorcolumn = true
 opt.cursorline = true

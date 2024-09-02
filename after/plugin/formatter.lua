@@ -16,6 +16,7 @@ require("conform").setup {
 		json = { "prettier" },
 		yaml = { "prettier" },
 		markdown = { "prettier" },
+		xml = { "xmlformat" },
 		["_"] = { "trim_whitespace" },
 	},
 	formatters = {

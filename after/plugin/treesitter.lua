@@ -5,9 +5,9 @@ require("nvim-treesitter.install").prefer_git = true
 ts_configs.setup {
 	ensure_installed = { "lua" },
 	auto_install = true,
-	ignore_install = {},
 	sync_install = false,
 	modules = {},
+	-- ignore_install = { "lua", "c", "vimdoc", "markdown", "markdown_inline", "query"},
 
 	highlight = {
 		enable = true,
@@ -68,7 +68,8 @@ ts_configs.setup {
 	},
 }
 
-vim.treesitter.language.register('c_sharp', 'mono-cs')
+vim.treesitter.language.register("c_sharp", "mono-cs")
+vim.treesitter.language.register("latex", "tex")
 
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
@@ -88,4 +89,3 @@ parser_config.ejs = {
 		requires_generate_from_grammar = true,
 	},
 }
-

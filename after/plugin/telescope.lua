@@ -15,21 +15,18 @@ local default_mappings = {
 		["<Down>"] = t_actions.nop,
 		["q"] = t_actions.close,
 	},
-	insert = {
-		["<leader>gti"] = vim.cmd.stopinsert,
-	},
 }
 
 telescope.setup {
 	defaults = {
-        file_ignore_patterns = { "node_modules" },
+		file_ignore_patterns = { "node_modules" },
 		mappings = {
 			i = default_mappings.insert,
 			n = default_mappings.normal,
 		},
-        preview = {
-            mime_hook = telescope_extras.mime_hook
-        }
+		preview = {
+			mime_hook = telescope_extras.mime_hook,
+		},
 	},
 	pickers = {
 		symbols = {
@@ -40,11 +37,11 @@ telescope.setup {
 		},
 		find_files = {
 			mappings = {
-				n = {
-					["<C-h>"] = telescope_extras.find_hidden_files,
-					F = telescope_extras.browse_selected_dir,
-					g = telescope_extras.search_git_files,
-				},
+				n = vim.tbl_extend("force", default_mappings, {
+                    ["<C-h>"] = telescope_extras.find_hidden_files,
+                    F = telescope_extras.browse_selected_dir,
+                    g = telescope_extras.search_git_files,
+				}),
 			},
 		},
 	},
@@ -54,11 +51,12 @@ telescope.setup {
 			hijack_netrw = true,
 			cwd_to_path = true,
 			prompt_path = true,
-            path = "%:p:h",
+			path = "%:p:h",
 			mappings = {
-				n = {
+				n = vim.tbl_extend("force", default_mappings, {
 					F = telescope_extras.find_in_directory,
-				},
+					x = telescope_extras.execute_shell_command,
+				}),
 			},
 		},
 	},
