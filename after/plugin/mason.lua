@@ -29,3 +29,12 @@ mason_lsp.setup {
 		jdtls = function() end,
 	},
 }
+
+require("lspconfig").ccls.setup {
+	init_options = {
+		cache = {
+			directory = ".ccls-cache",
+		},
+	},
+    root_dir = require("lspconfig.util").root_pattern("compile_commands.json", '.ccls', '.git', 'Makefile'),
+}
