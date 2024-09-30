@@ -1,7 +1,8 @@
 local tele_builtin = require "telescope.builtin"
 
-return function(bufnr)
-	return {
+return function(server, bufnr)
+	local mapper = require "utils.mappings"
+	mapper.create_mappings {
 		{
 			mode = "n",
 			keys = "gD",
