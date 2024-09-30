@@ -1,6 +1,15 @@
 return {
 	-- Surround
-	{ "kylechui/nvim-surround", event = { "BufNewFile", "BufReadPost" } },
+	{
+		"kylechui/nvim-surround",
+		version = "*", -- Use for stability; omit to use `main` branch for the latest features
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup {
+				-- Configuration here, or leave empty to use defaults
+			}
+		end,
+	},
 
 	-- Commentary
 	{
@@ -35,7 +44,7 @@ return {
 
 	{
 		"michaelrommel/nvim-silicon",
-        cmd = "Silicon",
+		cmd = "Silicon",
 		opts = {
 			{
 				font = "JetBrainsMono Nerd Font=34;Noto Color Emoji=34",
