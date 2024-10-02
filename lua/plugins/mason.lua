@@ -25,7 +25,6 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
-			"ms-jpq/coq_nvim",
 		},
 		config = function()
 			local mason_lsp = require "mason-lspconfig"
@@ -40,7 +39,7 @@ return {
 					end,
 					jdtls = function() end,
 					["csharp_ls"] = function()
-						lspconfig["csharp-ls"].setup {
+						lspconfig["csharp_ls"].setup {
 							on_attach = require "configs.lsp.mappings",
 							handlers = {
 								["textDocument/definition"] = require("csharpls_extended").handler,
