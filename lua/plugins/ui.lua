@@ -93,9 +93,10 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
-			"nvim-telescope/telescope.nvim", config = function ()
-                require('telescope').load_extension'noice'
-			end
+			"nvim-telescope/telescope.nvim",
+			config = function()
+				require("telescope").load_extension "noice"
+			end,
 		},
 	},
 
@@ -141,7 +142,7 @@ return {
 
 			theme.section.buttons.val = {
 				button("spc f f", "  Find file", "<cmd>Telescope find_files<cr>"),
-				button("r", "  Recent", "<cmd>telescope oldfiles<cr>"),
+				button("r", "  Recent", "<cmd>Telescope oldfiles<cr>"),
 				button("c", "  Configuration", configurate),
 				button("p", "󱀺  Projects", "<leader>prjs"),
 				button("q", "  Exit vim", "<cmd>wqa<cr>"),
@@ -241,6 +242,9 @@ return {
 		opts = {
 			marks = false,
 			registers = false,
+			spec = {
+				{ "<leader>o", group = "overseer" },
+			},
 		},
 		init = function()
 			vim.o.timeout = true

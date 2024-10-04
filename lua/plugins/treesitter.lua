@@ -1,11 +1,14 @@
 return {
+	{ "windwp/nvim-ts-autotag", event = "VeryLazy" },
+	{ "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		dependencides = {
-			{ "windwp/nvim-ts-autotag" },
-			{ "nvim-treesitter/nvim-treesitter-textobjects" },
+			{ "windwp/nvim-ts-autotag", event = "VeryLazy" },
+			{ "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
 		},
+		event = "VeryLazy",
 		config = function()
 			local ts_configs = require "nvim-treesitter.configs"
 

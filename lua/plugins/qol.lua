@@ -5,9 +5,7 @@ return {
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		event = "VeryLazy",
 		config = function()
-			require("nvim-surround").setup {
-				-- Configuration here, or leave empty to use defaults
-			}
+			require("nvim-surround").setup {}
 		end,
 	},
 
@@ -37,10 +35,22 @@ return {
 	{ "tpope/vim-fugitive", cmd = "Git" },
 
 	-- Hightlight hex color codes
-	{ "norcalli/nvim-colorizer.lua", event = { "BufNewFile", "BufReadPost" } },
+	{
+		"norcalli/nvim-colorizer.lua",
+		event = { "BufNewFile", "BufReadPost" },
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
 
 	-- Live Server
-	{ "barrett-ruth/live-server.nvim", cmd = { "LiveServerStart", "LiveServerStop", "LiveServerToggle" } },
+	{
+		"barrett-ruth/live-server.nvim",
+		cmd = { "LiveServerStart", "LiveServerStop", "LiveServerToggle" },
+		config = function()
+			require("live-server").setup()
+		end,
+	},
 
 	{
 		"michaelrommel/nvim-silicon",
