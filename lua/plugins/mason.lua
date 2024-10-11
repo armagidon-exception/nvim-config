@@ -1,7 +1,6 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		event = "VeryLazy",
 		config = function()
 			local mason = require "mason"
 			mason.setup {
@@ -21,11 +20,11 @@ return {
 	}, -- LSP package manager
 	{
 		"williamboman/mason-lspconfig.nvim",
-		event = "VeryLazy",
 		dependencies = {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
 		},
+		lazy = false,
 		config = function()
 			local mason_lsp = require "mason-lspconfig"
 			local lspconfig = require "lspconfig"

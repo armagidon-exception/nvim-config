@@ -60,10 +60,13 @@ return function(server, bufnr)
 		{
 			mode = "n",
 			keys = "<leader>rn",
-			command = ":IncRename ",
+			command = function ()
+                return string.format(":IncRename %s", vim.fn.expand('<cword>'))
+			end,
 			opts = {
 				desc = "Rename",
 				buffer = bufnr,
+                expr = true,
 			},
 		},
 		{

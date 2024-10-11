@@ -52,8 +52,26 @@ return {
 				},
 			}
 		end,
-	}, -- Formattersplugi
-	{ "mfussenegger/nvim-lint", event = "VeryLazy" }, -- Linter
-	{ "smjonas/inc-rename.nvim", event = "VeryLazy" }, -- Incremental renaming
-	{ "aznhe21/actions-preview.nvim", event = "VeryLazy" }, -- Code actions menu
+	},
+	{ "mfussenegger/nvim-lint" }, -- Linter
+	{
+		"smjonas/inc-rename.nvim",
+		config = function()
+			require("inc_rename").setup {
+				save_in_cmdline_history = false,
+			}
+		end,
+		init = function()
+			vim.o.inccommand = "split"
+		end,
+	},
+	{
+		"aznhe21/actions-preview.nvim",
+		event = "LspAttach",
+		config = function()
+			require("actions-preview").setup {
+				telescope = require("telescope.themes").get_dropdown { winblend = 10 },
+			}
+		end,
+	}, -- Code actions menu
 }
