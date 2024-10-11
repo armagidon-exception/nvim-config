@@ -1,6 +1,11 @@
 local mapper = require "utils.mappings"
 
 mapper.create_mappings {
+    {
+        mode = "t",
+        keys = "<Esc>",
+        command = "<c-\\><c-n>",
+    },
 	{
 		mode = "n",
 		keys = "i",
