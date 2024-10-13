@@ -1,18 +1,16 @@
+local lualine_extras = require "extras.lualine"
+local tbl = require "utils.table"
 return {
 	{
 		"folke/lazydev.nvim",
 		priority = 500,
 		ft = "lua",
 		dependencies = {
-			{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-			{ -- optional completion source for require statements and module annotations
-				"hrsh7th/nvim-cmp",
+			{ "Bilal2453/luvit-meta", lazy = true },
+			{
+				"iguanacucumber/magazine.nvim",
 				opts = function(_, opts)
-					opts.sources = opts.sources or {}
-					table.insert(opts.sources, {
-						name = "lazydev",
-						group_index = 0, -- set group index to 0 to skip loading LuaLS completions
-					})
+					tbl.merge_onto(opts, { sources = { { name = "lazydev", group_index = 0 } } })
 				end,
 			},
 		},
@@ -21,66 +19,72 @@ return {
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 			},
 		},
-	}, -- For neovim docs
+	},
 	{ "folke/neoconf.nvim", priority = 500 }, -- Json configuration for lua_ls
+	{ "Decodetalkers/csharpls-extended-lsp.nvim" },
 	{
 		"neovim/nvim-lspconfig",
 		event = "VeryLazy",
-		cmd = { "LspInfo", "LspInstall", "LspUninstall" },
-		dependencies = {
-			{ "Decodetalkers/csharpls-extended-lsp.nvim" },
-			{ "williamboman/mason.nvim" },
-		},
-	},
-	{
-		"mfussenegger/nvim-jdtls",
-		ft = { "java", "class" },
-	}, -- Adapter plugin for jdtls
-	{
-		"ranjithshegde/ccls.nvim",
-		ft = { "c", "cpp", "objc", "objcpp", "opencl" },
 		config = function()
-			local util = require "lspconfig.util"
-			local server_config = {
-				filetypes = { "c", "cpp", "objc", "objcpp", "opencl" },
-				root_dir = function(fname)
-					return util.root_pattern("compile_commands.json", "compile_flags.txt", ".git", ".ccls", "Makefile")(
-						fname
-					) or util.find_git_ancestor(fname)
-				end,
-				init_options = {
-					cache = {
-						directory = vim.fs.normalize "~/.cache/ccls/",
-					},
-				},
-			}
-			require("ccls").setup { lsp = { lspconfig = server_config } }
+			local extras = require "extras.lspconfig"
+			extras.setup_autocmds()
+			for _, setup in pairs(extras.manual_configs) do
+				setup()
+			end
 		end,
 	},
-
 	{
 		"nvim-lualine/lualine.nvim",
 		opts = function(_, opts)
-			local lspconfig = require "lspconfig"
-
-			local function fetch_lsp()
-				local msg = "No Active Lsp"
-				local buf_ft = vim.bo.filetype
-				local clients = vim.lsp.get_clients()
-				if next(clients) == nil then
-					return msg
-				end
-
-				for _, client in ipairs(clients) do
-					local config = lspconfig[client.name]
-					if config and config.filetypes and vim.fn.index(config.filetypes, buf_ft) ~= -1 then
-						return client.name
-					end
-				end
-				return msg
-			end
-
-			require("utils.table").insert_in(opts, { "sections", "lualine_c" }, { fetch_lsp, icon = " LSP:" })
+			tbl.merge_onto(opts, {
+				sections = {
+					lualine_c = {
+						lualine_extras.get_lsp_widget(),
+					},
+				},
+			})
 		end,
 	},
+	{
+		"williamboman/mason.nvim",
+		config = function()
+			local mason = require "mason"
+			mason.setup {
+				ui = {
+					check_outdated_packages_on_open = true,
+					border = "none",
+					width = 0.6,
+					height = 0.6,
+					icons = {
+						package_installed = "👍",
+						package_pending = "💫",
+						package_uninstalled = "😵",
+					},
+				},
+			}
+		end,
+	}, -- LSP package manager
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+		},
+		event = "VeryLazy",
+		config = function()
+			local mason_lsp = require "mason-lspconfig"
+			local lspconfig = require "lspconfig"
+
+			mason_lsp.setup {
+				ensure_installed = { "lua_ls" },
+				automatic_installation = true,
+				handlers = {
+					function(servername)
+						lspconfig[servername].setup {}
+					end,
+				},
+			}
+		end,
+	},
+	{},
 }

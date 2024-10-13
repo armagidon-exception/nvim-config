@@ -1,7 +1,7 @@
 local telescope = require "telescope"
 local t_actions = require "telescope.actions"
 local builtin = require "telescope.builtin"
-local telescope_extras = require "configs.telescope"
+local telescope_extras = require "extras.telescope"
 
 local default_mappings = {
 	normal = {

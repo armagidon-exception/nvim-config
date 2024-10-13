@@ -1,6 +1,7 @@
 return {
 	{
-		"hrsh7th/nvim-cmp",
+		"iguanacucumber/magazine.nvim",
+		name = "nvim-cmp",
 		dependencies = {
 			{ "hrsh7th/cmp-nvim-lsp" }, -- Completion
 			{ "hrsh7th/cmp-buffer" }, -- Completion source for buffer
@@ -11,8 +12,10 @@ return {
 			{ "saadparwaiz1/cmp_luasnip" }, -- Integration with cmp
 			{ "onsails/lspkind.nvim" }, -- Kind Icons
 		},
-		config = function()
+		opts = function(_, opts)
 			local cmp = require "cmp"
+			local win_config = cmp.config.window.bordered()
+
 			local lspkind = require "lspkind"
 
 			local select_next_item = cmp.mapping(function(fallback)
@@ -33,11 +36,7 @@ return {
 				["<CR>"] = cmp.mapping.confirm { select = true },
 			}
 
-			require("luasnip.loaders.from_vscode").lazy_load()
-
-			local win_config = cmp.config.window.bordered()
-
-			cmp.setup {
+			require("utils.table").merge_onto(opts, {
 				performance = {
 					max_view_entries = 20,
 				},
@@ -62,14 +61,21 @@ return {
 					ghost_text = true,
 				},
 				mapping = cmp.mapping.preset.insert(mappings),
-				sources = cmp.config.sources {
+				sources = {
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "buffer" },
 					{ name = "path" },
 				},
-			}
-
+			})
 		end,
-	}, -- Completion
+		config = function(_, opts)
+			require("luasnip.loaders.from_vscode").lazy_load()
+			local cmp = require "cmp"
+
+			opts.sources = cmp.config.sources(opts.sources)
+
+			cmp.setup(opts)
+		end,
+	},
 }
