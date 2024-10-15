@@ -24,7 +24,6 @@ return {
 	{ "Decodetalkers/csharpls-extended-lsp.nvim" },
 	{
 		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
 		config = function()
 			local extras = require "extras.lspconfig"
 			extras.setup_autocmds()
@@ -70,7 +69,6 @@ return {
 			"williamboman/mason.nvim",
 			"neovim/nvim-lspconfig",
 		},
-		event = "VeryLazy",
 		config = function()
 			local mason_lsp = require "mason-lspconfig"
 			local lspconfig = require "lspconfig"
@@ -80,6 +78,10 @@ return {
 				automatic_installation = true,
 				handlers = {
 					function(servername)
+						local extras = require "extras.lspconfig"
+                        if extras.manual_configs[servername] then
+                            return
+                        end
 						lspconfig[servername].setup {}
 					end,
 				},
