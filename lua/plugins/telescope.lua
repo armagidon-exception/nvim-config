@@ -1,106 +1,87 @@
-local telescope = require "telescope"
-local t_actions = require "telescope.actions"
-local builtin = require "telescope.builtin"
-local telescope_extras = require "extras.telescope"
-
-local default_mappings = {
-	normal = {
-		["<Tab>"] = t_actions.move_selection_next,
-		["<S-Tab>"] = t_actions.move_selection_previous,
-		["="] = t_actions.toggle_selection,
-		["K"] = telescope_extras.select_prev,
-		["J"] = telescope_extras.select_next,
-		["<Up>"] = t_actions.nop,
-		["<Down>"] = t_actions.nop,
-		["q"] = t_actions.close,
-	},
-}
-
 return {
 	{
-
+		"nvim-telescope/telescope-fzf-native.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+		config = function()
+			local telescope = require "telescope"
+			telescope.load_extension "fzf"
+		end,
+	},
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+        event = "VeryLazy",
+		keys = { { "<leader>fb" } },
+		config = function()
+			local telescope = require "telescope"
+			telescope.load_extension "file_browser"
+			vim.keymap.set("n", "<leader>fb", "<cmd>Telescope file_browser<cr>", { desc = "Open file browser" })
+		end,
+	},
+	{
+		"nvim-telescope/telescope-ui-select.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		config = function()
+			local telescope = require "telescope"
+			telescope.load_extension "ui-select"
+		end,
+	},
+	{
+		"nvim-telescope/telescope-symbols.nvim",
+		keys = { { "<leader>sym" } },
+		dependencies = { "nvim-telescope/telescope.nvim" },
+		config = function()
+			vim.keymap.set("n", "<leader>sym", "<cmd>Telescope symbols<cr>", { desc = "Emoji pack" })
+		end,
+	},
+	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		dependencies = {
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
-			},
-			{
-				"nvim-telescope/telescope-file-browser.nvim",
-				keys = {
-					{
-						"<leader>fb",
-						"<cmd>Telescope file_browser<cr>",
-						desc = "File browser",
-					},
-				},
-			},
-			{ "nvim-telescope/telescope-ui-select.nvim" },
-			{
-				"nvim-telescope/telescope-symbols.nvim",
-				keys = {
-					{
-						"<leader>sym",
-						builtin.symbols,
-						desc = "Show symbols",
-					},
-				},
-			},
 			{ "nvim-lua/plenary.nvim" },
 		},
 		keys = {
-			{
-				"<leader>ff",
-				builtin.find_files,
-				desc = "Find files",
-			},
-			{
-				"<leader>fg",
-				builtin.live_grep,
-				desc = "Live grep",
-			},
-			{
-				"<leader>bfs",
-				builtin.buffers,
-				desc = "List buffers",
-			},
-			{
-				"<leader>fh",
-				builtin.help_tags,
-				desc = "Help tags",
-			},
+			{ "<leader>ff" },
+			{ "<leader>fg" },
+			{ "<leader>bfs" },
+			{ "<leader>fh" },
 		},
-		config = function()
-			telescope.setup {
+		opts = function(_, opts)
+			local themes = require "telescope.themes"
+			local extras = require "extras.telescope"
+			require("utils.table").merge_onto(opts, {
 				defaults = {
 					file_ignore_patterns = { "node_modules" },
 					mappings = {
-						i = default_mappings.insert,
-						n = default_mappings.normal,
+						i = extras.mappings.defaults.insert,
+						n = extras.mappings.defaults.normal,
 					},
 					preview = {
-						mime_hook = telescope_extras.mime_hook,
+						mime_hook = extras.mime_hook,
 					},
 				},
 				pickers = {
+                    live_grep = {
+                        theme = themes.get_dropdown {},
+                    },
 					symbols = {
-						theme = "dropdown",
+						theme = themes.get_dropdown {},
 					},
 					buffers = {
-						theme = "dropdown",
+						theme = themes.get_dropdown {},
 					},
 					find_files = {
 						mappings = {
-							n = vim.tbl_extend("force", default_mappings, {
-								["<C-h>"] = telescope_extras.find_hidden_files,
-								F = telescope_extras.browse_selected_dir,
-								g = telescope_extras.search_git_files,
-							}),
+							n = extras.mappings.find_files.normal,
+                            i = extras.mappings.find_files.insert
 						},
 					},
 				},
 				extensions = {
+					["ui-select"] = {
+						themes.get_dropdown {},
+					},
 					file_browser = {
 						theme = "dropdown",
 						hijack_netrw = true,
@@ -108,18 +89,21 @@ return {
 						prompt_path = true,
 						path = "%:p:h",
 						mappings = {
-							n = vim.tbl_extend("force", default_mappings, {
-								F = telescope_extras.find_in_directory,
-								x = telescope_extras.execute_shell_command,
-							}),
+							n = extras.mappings.file_browser.normal,
+                            i = extras.mappings.file_browser.insert
 						},
 					},
 				},
-			}
+			})
+		end,
+		config = function(_, opts)
+			local telescope = require "telescope"
+			telescope.setup(opts)
 
-			telescope.load_extension "fzf"
-			telescope.load_extension "file_browser"
-			telescope.load_extension "ui-select"
+			vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+			vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Search for string" })
+			vim.keymap.set("n", "<leader>bfs", "<cmd>Telescope buffers<cr>", { desc = "Show all buffers" })
+			vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Search for help tag" })
 		end,
 	},
 }

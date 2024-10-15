@@ -4,8 +4,6 @@ local builtin = require "telescope.builtin"
 local stream = require "utils.stream"
 local extras = {}
 
-extras.defaults = {}
-
 function extras.find_hidden_files()
 	builtin.find_files { hidden = true }
 end
@@ -52,8 +50,8 @@ extras.mime_hook = function(filepath, bufnr, opts)
 end
 
 extras.select_prev = function(promptnr)
-    t_actions.toggle_selection(promptnr)
-    t_actions.move_selection_previous(promptnr)
+	t_actions.toggle_selection(promptnr)
+	t_actions.move_selection_previous(promptnr)
 end
 
 extras.select_next = function(promptnr)
@@ -77,15 +75,15 @@ extras.execute_shell_command = function(promptnr)
 	end
 
 	local paths = stream.table_map(picker:get_multi_selection(), function(val)
-        return val[1]
+		return val[1]
 	end)
 
-    local TELESCOPE_SELECTION = table.concat(paths, ' ')
+	local TELESCOPE_SELECTION = table.concat(paths, " ")
 
 	vim.fn.jobstart(input, {
-        env = {
-            TELESCOPE_SELECTION = TELESCOPE_SELECTION,
-        },
+		env = {
+			TELESCOPE_SELECTION = TELESCOPE_SELECTION,
+		},
 		cwd = cwd,
 		detach = 0,
 		on_stdout = function(n, stdout)
@@ -100,5 +98,53 @@ extras.execute_shell_command = function(promptnr)
 		stderr_buffered = true,
 	})
 end
+
+extras.mappings = {}
+
+extras.mappings._defaults = {
+	normal = {
+		["<Tab>"] = t_actions.move_selection_next,
+		["<S-Tab>"] = t_actions.move_selection_previous,
+		["="] = t_actions.toggle_selection,
+		["K"] = extras.select_prev,
+		["J"] = extras.select_next,
+		["<Up>"] = t_actions.nop,
+		["<Down>"] = t_actions.nop,
+		["q"] = t_actions.close,
+	},
+}
+
+extras.mappings._file_browser = {
+	normal = {
+		F = extras.find_in_directory,
+		x = extras.browse_selected_dir,
+	},
+}
+
+extras.mappings._find_files = {
+	normal = {
+		["<C-h>"] = extras.find_hidden_files,
+		F = extras.browse_selected_dir,
+		g = extras.search_git_files,
+	},
+}
+
+extras.mappings = setmetatable(extras.mappings, {
+	__index = function(self, key)
+		if string.find(key, "^_") then
+			error "accessing private field"
+		end
+		local mappings = rawget(self, string.format("_%s", key))
+			or error(string.format("Mappings group %s was not found", key))
+
+		mappings = vim.tbl_deep_extend("force", rawget(self, "_defaults"), mappings)
+
+		return setmetatable(mappings, {
+			__index = function(t, k)
+				return rawget(t, k) or {}
+			end,
+		})
+	end,
+})
 
 return extras

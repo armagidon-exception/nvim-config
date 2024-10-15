@@ -10,6 +10,7 @@ function M.setup_autocmds()
 		end,
 	})
 end
+
 function M.setup_keymappings(bufnr)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Show declaration" })
 	vim.keymap.set("n", "gd", tele_builtin.lsp_definitions, { buffer = bufnr, desc = "Show definitions" })
@@ -74,7 +75,7 @@ manual_configs["clangd"] = function()
 			client.server_capabilities.signatureHelpProvider = false
 		end,
 		root_dir = function(fname)
-			return require("lspconfig.util").root_pattern(table.unpack(root_files))(fname)
+			return require("lspconfig.util").root_pattern(unpack(root_files))(fname)
 				or require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname)
 				or require("lspconfig.util").find_git_ancestor(fname)
 		end,
@@ -92,4 +93,5 @@ manual_configs["clangd"] = function()
 end
 
 M.manual_configs = manual_configs
+
 return M

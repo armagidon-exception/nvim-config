@@ -86,7 +86,7 @@ return {
 				},
 			},
 			presets = {
-				long_message_to_split = true,
+				long_message_to_split = false,
 				lsp_doc_border = true,
 			},
 		},

@@ -1,3 +1,31 @@
+local menu_names = {
+	Text = "[Text]",
+	Method = "[Method]",
+	Function = "[Function]",
+	Constructor = "[Constructor]",
+	Field = "[Field]",
+	Variable = "[Variable]",
+	Class = "[Class]",
+	Interface = "[Interface]",
+	Module = "[Module]",
+	Property = "[Property]",
+	Unit = "[Unit]",
+	Value = "[Value]",
+	Enum = "[Enum]",
+	Keyword = "[Keyword]",
+	Snippet = "[Snippet]",
+	Color = "[Color]",
+	File = "[File]",
+	Reference = "[Reference]",
+	Folder = "[Folder]",
+	EnumMember = "[EnumMember]",
+	Constant = "[Constant]",
+	Struct = "[Struct]",
+	Event = "[Event]",
+	Operator = "[Operator]",
+	TypeParameter = "[TypeParameter]",
+}
+
 return {
 	{
 		"iguanacucumber/magazine.nvim",
@@ -17,6 +45,12 @@ return {
 			local win_config = cmp.config.window.bordered()
 
 			local lspkind = require "lspkind"
+
+            local symbolic = lspkind.symbolic
+            rawset(lspkind, "symbolic", function (kind, o)
+                local formatter = symbolic(kind, o)
+                return string.format("%s  %s", formatter, menu_names[kind])
+            end)
 
 			local select_next_item = cmp.mapping(function(fallback)
 				return cmp.visible() and cmp.select_next_item { behavior = cmp.SelectBehavior.Select } or fallback()
@@ -50,7 +84,6 @@ return {
 						mode = "symbol",
 						maxwidth = 30,
 						ellipsis_char = "...",
-						menu = {},
 					},
 				},
 				window = {

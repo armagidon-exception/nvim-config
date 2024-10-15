@@ -20,7 +20,7 @@ return {
 			},
 		},
 	},
-	{ "folke/neoconf.nvim", priority = 500 }, -- Json configuration for lua_ls
+	{ "folke/neoconf.nvim" }, -- Json configuration for lua_ls
 	{ "Decodetalkers/csharpls-extended-lsp.nvim" },
 	{
 		"neovim/nvim-lspconfig",
@@ -79,9 +79,9 @@ return {
 				handlers = {
 					function(servername)
 						local extras = require "extras.lspconfig"
-                        if extras.manual_configs[servername] then
-                            return
-                        end
+						if extras.manual_configs[servername] then
+							return
+						end
 						lspconfig[servername].setup {}
 					end,
 				},
