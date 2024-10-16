@@ -27,11 +27,7 @@ return {
 			require("clangd_extensions").setup(opts)
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(event)
-					-- local client = vim.lsp.get_client_by_id(event.data.client_id)
 					local buf = event.bufnr
-					require("clangd_extensions.inlay_hints").setup_autocmd()
-					require("clangd_extensions.inlay_hints").set_inlay_hints()
-
 					local group = vim.api.nvim_create_augroup("clangd_no_inlay_hints_in_insert", { clear = true })
 
 					vim.keymap.set("n", "<leader>lh", function()

@@ -1,11 +1,11 @@
 local mapper = require "utils.mappings"
 
 mapper.create_mappings {
-    {
-        mode = "t",
-        keys = "<Esc>",
-        command = "<c-\\><c-n>",
-    },
+	{
+		mode = "t",
+		keys = "<Esc>",
+		command = "<c-\\><c-n>",
+	},
 	{
 		mode = "n",
 		keys = "i",
@@ -129,30 +129,20 @@ mapper.create_mappings {
 		keys = "<",
 		command = "<gv",
 	},
-	-- {
-	-- 	mode = "n",
-	-- 	keys = "o",
-	-- 	command = "oa<BS><ESC>",
-	-- },
-	-- {
-	-- 	mode = "n",
-	-- 	keys = "O",
-	-- 	command = "Oa<BS><ESC>",
-	-- },
 	{
 		mode = "i",
 		keys = "<A-0>",
 		command = "<esc>l",
 	},
-    {
-        mode = "n",
-        keys = "<leader>r",
-        command = function ()
-            local filename = vim.fn.expand('%:p:h')
-            if vim.fn.isdirectory(filename) == 1 then
-                vim.cmd.lcd(filename)
-                vim.notify("Root folder has been set to " .. filename)
-            end
-        end
-    }
+	{
+		mode = "n",
+		keys = "<leader>r",
+		command = function()
+			local filename = vim.fn.expand "%:p:h"
+			if vim.fn.isdirectory(filename) == 1 then
+				vim.cmd.lcd(filename)
+				vim.notify("Root folder has been set to " .. filename)
+			end
+		end,
+	},
 }

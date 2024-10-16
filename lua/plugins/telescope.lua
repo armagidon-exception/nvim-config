@@ -63,13 +63,13 @@ return {
 				},
 				pickers = {
                     live_grep = {
-                        theme = themes.get_dropdown {},
+                        theme = "dropdown"
                     },
 					symbols = {
-						theme = themes.get_dropdown {},
+                        theme = "dropdown"
 					},
 					buffers = {
-						theme = themes.get_dropdown {},
+                        theme = "dropdown"
 					},
 					find_files = {
 						mappings = {

@@ -3,6 +3,8 @@ return {
 		"rcarriga/nvim-notify",
 		opts = {
 			timeout = 10000,
+			render = "wrapped_default",
+			maximum_width = 100,
 		},
 	},
 	{
@@ -93,151 +95,12 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
-			"nvim-telescope/telescope.nvim",
-			config = function()
-				require("telescope").load_extension "noice"
-			end,
-		},
-	},
-
-	{
-		"goolord/alpha-nvim",
-		event = "VimEnter",
-		config = function()
-			local alpha = require "alpha"
-			local theme = require "alpha.themes.dashboard"
-			local button = function(c, l, f)
-				if type(f) == "string" then
-					return theme.button(c, l, f)
-				else
-					local b = theme.button(c, l)
-					b.on_press = f
-					return b
-				end
-			end
-
-			theme.section.header.val = {
-				[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⡀⠒⠒⠦⣄⡀⠀⠀⠀⠀⠀⠀⠀]],
-				[[⠀⠀⠀⠀⠀⢀⣤⣶⡾⠿⠿⠿⠿⣿⣿⣶⣦⣄⠙⠷⣤⡀⠀⠀⠀⠀]],
-				[[⠀⠀⠀⣠⡾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣿⣷⣄⠘⢿⡄⠀⠀⠀]],
-				[[⠀⢀⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⠐⠂⠠⢄⡀⠈⢿⣿⣧⠈⢿⡄⠀⠀]],
-				[[⢀⠏⠀⠀⠀⢀⠄⣀⣴⣾⠿⠛⠛⠛⠷⣦⡙⢦⠀⢻⣿⡆⠘⡇⠀⠀]],
-				[[⠀⠀⠀⠀⡐⢁⣴⡿⠋⢀⠠⣠⠤⠒⠲⡜⣧⢸⠄⢸⣿⡇⠀⡇⠀⠀]],
-				[[⠀⠀⠀⡼⠀⣾⡿⠁⣠⢃⡞⢁⢔⣆⠔⣰⠏⡼⠀⣸⣿⠃⢸⠃⠀⠀]],
-				[[⠀⠀⢰⡇⢸⣿⡇⠀⡇⢸⡇⣇⣀⣠⠔⠫⠊⠀⣰⣿⠏⡠⠃⠀⠀⢀]],
-				[[⠀⠀⢸⡇⠸⣿⣷⠀⢳⡈⢿⣦⣀⣀⣀⣠⣴⣾⠟⠁⠀⠀⠀⠀⢀⡎]],
-				[[⠀⠀⠘⣷⠀⢻⣿⣧⠀⠙⠢⠌⢉⣛⠛⠋⠉⠀⠀⠀⠀⠀⠀⣠⠎⠀]],
-				[[⠀⠀⠀⠹⣧⡀⠻⣿⣷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡾⠃⠀⠀]],
-				[[⠀⠀⠀⠀⠈⠻⣤⡈⠻⢿⣿⣷⣦⣤⣤⣤⣤⣤⣴⡾⠛⠉⠀⠀⠀⠀]],
-				[[⠀⠀⠀⠀⠀⠀⠈⠙⠶⢤⣈⣉⠛⠛⠛⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀]],
-				[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-			}
-
-			local configurate = function()
-				local path = vim.fs.normalize(vim.fn.stdpath "config" .. "")
-				vim.cmd.e(path)
-				vim.cmd.lcd(path)
-				vim.notify_once("Configuring...", vim.log.levels.info)
-			end
-
-			theme.section.buttons.val = {
-				button("spc f f", "  Find file", "<cmd>Telescope find_files<cr>"),
-				button("r", "  Recent", "<cmd>Telescope oldfiles<cr>"),
-				button("c", "  Configuration", configurate),
-				button("p", "󱀺  Projects", "<leader>prjs"),
-				button("q", "  Exit vim", "<cmd>wqa<cr>"),
-			}
-			alpha.setup(theme.config)
-		end,
-	},
-
-	-- Status line
-	{
-		"nvim-lualine/lualine.nvim",
-		dependencies = { { "folke/noice.nvim" } },
-		opts = function(_, opts)
-			local tbl_utils = require "utils.table"
-			local noice = require "noice"
-
-			local noice_status = noice.api.status.mode
-
-			tbl_utils.merge_onto(opts, {
-				options = {
-					component_separators = { left = "", right = "" },
-					section_separators = { left = "|", right = "|" },
-				},
-				sections = {
-					lualine_a = { "mode" },
-					lualine_b = { "branch", "diff" },
-					lualine_x = { "encoding", "fileformat", "filetype", { noice_status.get, cond = noice_status.has } },
-					lualine_y = { "progress" },
-					lualine_z = { "location" },
-				},
-			})
-		end,
-		config = function(_, opts)
-			require("lualine").setup(opts)
-		end,
-	},
-
-	-- Bufferline
-	{
-		"akinsho/bufferline.nvim",
-		lazy = false,
-		config = function()
-			local bufferline = require "bufferline"
-
-			vim.opt.termguicolors = true
-
-			bufferline.setup {
-				options = {
-					mode = "buffers",
-					diagnostics = "nvim_lsp",
-					color_icons = true,
-					show_close_icon = false,
-					show_buffer_close_icons = false,
-					right_mouse_command = nil,
-					left_mouse_command = nil,
-					diagnostics_update_in_insert = false,
-					themable = true,
-					diagnostics_indicator = function(count, level)
-						local icon = level:match "error" and " " or ""
-						return " " .. icon .. count
-					end,
-					always_show_bufferline = false,
-
-					custom_filter = function(ft)
-						if ft == "TelescopePrompt" then
-							return false
-						end
-						return true
-					end,
-				},
-			}
-		end,
-	},
-
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		opts = {
-			marks = false,
-			registers = false,
-			spec = {
-				{ "<leader>o", group = "overseer" },
-			},
-		},
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
-		keys = {
 			{
-				"<leader>?",
-				function()
-					require("which-key").show { global = false }
+				"nvim-telescope/telescope.nvim",
+				optinal = true,
+				config = function()
+					require("telescope").load_extension "noice"
 				end,
-				desc = "Buffer Local Keymaps (which-key)",
 			},
 		},
 	},

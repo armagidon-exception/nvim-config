@@ -46,11 +46,11 @@ return {
 
 			local lspkind = require "lspkind"
 
-            local symbolic = lspkind.symbolic
-            rawset(lspkind, "symbolic", function (kind, o)
-                local formatter = symbolic(kind, o)
-                return string.format("%s  %s", formatter, menu_names[kind])
-            end)
+			local symbolic = lspkind.symbolic
+			rawset(lspkind, "symbolic", function(kind, o)
+				local formatter = symbolic(kind, o)
+				return string.format("%s  %s", formatter, menu_names[kind])
+			end)
 
 			local select_next_item = cmp.mapping(function(fallback)
 				return cmp.visible() and cmp.select_next_item { behavior = cmp.SelectBehavior.Select } or fallback()
