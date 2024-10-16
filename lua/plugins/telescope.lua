@@ -11,7 +11,7 @@ return {
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim" },
-        event = "VeryLazy",
+		event = "VeryLazy",
 		keys = { { "<leader>fb" } },
 		config = function()
 			local telescope = require "telescope"
@@ -38,6 +38,7 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
+        event = "VeryLazy",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 		},
@@ -62,19 +63,19 @@ return {
 					},
 				},
 				pickers = {
-                    live_grep = {
-                        theme = "dropdown"
-                    },
+					live_grep = {
+						theme = "dropdown",
+					},
 					symbols = {
-                        theme = "dropdown"
+						theme = "dropdown",
 					},
 					buffers = {
-                        theme = "dropdown"
+						theme = "dropdown",
 					},
 					find_files = {
 						mappings = {
 							n = extras.mappings.find_files.normal,
-                            i = extras.mappings.find_files.insert
+							i = extras.mappings.find_files.insert,
 						},
 					},
 				},
@@ -90,7 +91,7 @@ return {
 						path = "%:p:h",
 						mappings = {
 							n = extras.mappings.file_browser.normal,
-                            i = extras.mappings.file_browser.insert
+							i = extras.mappings.file_browser.insert,
 						},
 					},
 				},
@@ -99,11 +100,10 @@ return {
 		config = function(_, opts)
 			local telescope = require "telescope"
 			telescope.setup(opts)
-
-			vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-			vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Search for string" })
-			vim.keymap.set("n", "<leader>bfs", "<cmd>Telescope buffers<cr>", { desc = "Show all buffers" })
-			vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Search for help tag" })
+            vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+            vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Search for string" })
+            vim.keymap.set("n", "<leader>bfs", "<cmd>Telescope buffers<cr>", { desc = "Show all buffers" })
+            vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Search for help tag" })
 		end,
 	},
 }

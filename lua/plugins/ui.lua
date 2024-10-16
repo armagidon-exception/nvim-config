@@ -3,7 +3,7 @@ return {
 		"rcarriga/nvim-notify",
 		opts = {
 			timeout = 10000,
-			render = "wrapped_default",
+			render = "wrapped-default",
 			maximum_width = 100,
 		},
 	},
@@ -95,13 +95,11 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
-			{
-				"nvim-telescope/telescope.nvim",
-				optinal = true,
-				config = function()
-					require("telescope").load_extension "noice"
-				end,
-			},
+			"nvim-telescope/telescope.nvim",
 		},
+		config = function(_, opts)
+            require('noice').setup(opts)
+			require("telescope").load_extension "noice"
+		end,
 	},
 }
