@@ -72,7 +72,7 @@ manual_configs["clangd"] = function()
 	local lspconfig = require "lspconfig"
 	lspconfig["clangd"].setup {
 		on_attach = function(client, bufnr)
-			client.server_capabilities.signatureHelpProvider = false
+			-- client.server_capabilities.signatureHelpProvider = false
 		end,
 		root_dir = function(fname)
 			return require("lspconfig.util").root_pattern(unpack(root_files))(fname)
