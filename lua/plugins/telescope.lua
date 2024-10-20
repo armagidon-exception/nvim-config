@@ -1,5 +1,12 @@
 return {
 	{
+		"tsakirist/telescope-lazy.nvim",
+		dependencies = "nvim-telescope/telescope.nvim",
+		config = function()
+			require("telescope").load_extension "lazy"
+		end,
+	},
+	{
 		"nvim-telescope/telescope-fzf-native.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim" },
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
@@ -91,10 +98,10 @@ return {
 		config = function(_, opts)
 			local telescope = require "telescope"
 			telescope.setup(opts)
-            vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-            vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Search for string" })
-            vim.keymap.set("n", "<leader>bfs", "<cmd>Telescope buffers<cr>", { desc = "Show all buffers" })
-            vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Search for help tag" })
+			vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+			vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Search for string" })
+			vim.keymap.set("n", "<leader>bfs", "<cmd>Telescope buffers<cr>", { desc = "Show all buffers" })
+			vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Search for help tag" })
 		end,
 	},
 }
