@@ -11,8 +11,6 @@ return {
 	{
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim" },
-		event = "VeryLazy",
-		keys = { { "<leader>fb" } },
 		config = function()
 			local telescope = require "telescope"
 			telescope.load_extension "file_browser"
@@ -38,15 +36,8 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-        event = "VeryLazy",
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
-		},
-		keys = {
-			{ "<leader>ff" },
-			{ "<leader>fg" },
-			{ "<leader>bfs" },
-			{ "<leader>fh" },
 		},
 		opts = function(_, opts)
 			local themes = require "telescope.themes"
