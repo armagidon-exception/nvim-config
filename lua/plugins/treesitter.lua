@@ -15,6 +15,7 @@ return {
 				ignore_install = {},
 				highlight = {
 					enable = true,
+                    disable = {"latex"}
 				},
 				incremental_selection = {
 					enable = true,
@@ -72,7 +73,7 @@ return {
 			}
 
 			vim.treesitter.language.register("c_sharp", "mono-cs")
-			vim.treesitter.language.register("latex", "tex")
+			-- vim.treesitter.language.register("latex", "tex")
 		end,
 	},
 }
