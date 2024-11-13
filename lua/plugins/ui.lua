@@ -1,6 +1,6 @@
 return {
 	{
-		"rcarriga/nvim-notify",
+		"armagidon-exception/nvim-notify",
 		opts = {
 			timeout = 10000,
 			render = "wrapped-default",
@@ -94,7 +94,7 @@ return {
 		},
 		dependencies = {
 			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
+			"armagidon-exception/nvim-notify",
 			"nvim-telescope/telescope.nvim",
 		},
 		config = function(_, opts)
