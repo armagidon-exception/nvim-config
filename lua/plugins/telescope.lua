@@ -105,6 +105,7 @@ return {
 			vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Search for string" })
 			vim.keymap.set("n", "<leader>bfs", "<cmd>Telescope buffers<cr>", { desc = "Show all buffers" })
 			vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Search for help tag" })
+			vim.keymap.set("n", "<leader>man", "<cmd>Telescope man_pages<cr>", { desc = "Open man pages" })
 		end,
 	},
 }
