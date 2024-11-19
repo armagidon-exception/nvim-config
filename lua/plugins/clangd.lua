@@ -51,7 +51,7 @@ return {
 		end,
 	},
 	{
-		"iguanacucumber/magazine.nvim",
+        "nvim-cmp",
 		opts = function(_, opts)
 			require("utils.table").merge_onto(opts, {
 				sorting = {

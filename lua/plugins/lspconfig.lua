@@ -8,7 +8,7 @@ return {
 		dependencies = {
 			{ "Bilal2453/luvit-meta", lazy = true },
 			{
-				"iguanacucumber/magazine.nvim",
+				"nvim-cmp",
 				opts = function(_, opts)
 					tbl.merge_onto(opts, { sources = { { name = "lazydev", group_index = 0 } } })
 				end,
