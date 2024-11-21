@@ -32,23 +32,12 @@ return {
 		},
 	},
 
-	{ "tpope/vim-fugitive", cmd = "Git" },
-
 	-- Hightlight hex color codes
 	{
 		"norcalli/nvim-colorizer.lua",
 		event = { "BufNewFile", "BufReadPost" },
 		config = function()
 			require("colorizer").setup()
-		end,
-	},
-
-	-- Live Server
-	{
-		"barrett-ruth/live-server.nvim",
-		cmd = { "LiveServerStart", "LiveServerStop", "LiveServerToggle" },
-		config = function()
-			require("live-server").setup()
 		end,
 	},
 
