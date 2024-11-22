@@ -78,27 +78,6 @@ mapper.create_mappings {
 	},
 	{
 		mode = "n",
-		keys = "<C-h>",
-		command = "<C-w>h",
-	},
-	{
-		mode = "n",
-		keys = "<C-j>",
-		command = "<C-w>j",
-	},
-	{
-		mode = "n",
-		keys = "<C-k>",
-		command = "<C-w>k",
-	},
-	{
-		mode = "n",
-		keys = "<C-l>",
-		command = "<C-w>l",
-	},
-
-	{
-		mode = "n",
 		keys = "<C-Up>",
 		command = "<cmd>resize +2<cr>",
 	},
