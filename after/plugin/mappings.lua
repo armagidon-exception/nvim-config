@@ -124,4 +124,32 @@ mapper.create_mappings {
 			end
 		end,
 	},
+	{
+		mode = "n",
+		keys = "u",
+		command = function()
+			local coords = vim.fn.getpos "."
+			local row = coords[2]
+			local col = coords[3]
+			vim.cmd.undo()
+            local height = vim.fn.line('$')
+            if height >= row then
+                vim.api.nvim_win_set_cursor(0, { row, col - 1 })
+            end
+		end,
+	},
+	{
+		mode = "n",
+		keys = "<C-r>",
+		command = function()
+			local coords = vim.fn.getpos "."
+			local row = coords[2]
+			local col = coords[3]
+			vim.cmd.redo()
+            local height = vim.fn.line('$')
+            if height >= row then
+                vim.api.nvim_win_set_cursor(0, { row, col - 1 })
+            end
+		end,
+	},
 }
