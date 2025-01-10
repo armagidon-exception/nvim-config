@@ -1,0 +1,5 @@
+require'armagidon.config.options'
+require'armagidon.config.filetypes'
+require'armagidon.config.autocmds'
+require'armagidon.config.mappings'
+require'armagidon.config.lazy'
