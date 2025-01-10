@@ -40,19 +40,18 @@ return {
 			require("colorizer").setup()
 		end,
 	},
-
 	{
 		"michaelrommel/nvim-silicon",
 		cmd = "Silicon",
+		lazy = true,
 		opts = {
-			{
-				font = "JetBrainsMono Nerd Font=34;Noto Color Emoji=34",
-				theme = "Dracula",
-				background = "#94e2d5",
-				window_title = function()
-					return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ":t")
-				end,
-			},
+			font = "JetBrainsMono Nerd Font=34;Noto Color Emoji=34",
+			theme = "Dracula",
+			background = "#94e2d5",
+			window_title = function()
+				return vim.fn.fnamemodify(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()), ":t")
+			end,
+			to_clipboard = true,
 		},
 	},
 }
