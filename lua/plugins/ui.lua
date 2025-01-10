@@ -2,9 +2,9 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		opts = {
-			timeout = 10000,
-			render = "wrapped-default",
-			maximum_width = 100,
+			timeout = 2000,
+			render = "wrapped-compact",
+			max_width = 50,
 		},
 	},
 	{
@@ -59,6 +59,9 @@ return {
 				view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
 			},
 			views = {
+                -- notify = {
+                --     replace = true,
+                -- },
 				cmdline_popup = {
 					position = {
 						row = "50%",
