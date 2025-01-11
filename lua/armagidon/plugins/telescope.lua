@@ -46,9 +46,10 @@ return {
 		dependencies = {
 			{ "nvim-lua/plenary.nvim" },
 		},
-        opts = function()
+		opts = function(_, opts)
 			local themes = require "telescope.themes"
-            return {
+
+            return vim.tbl_deep_extend("force", opts, {
 				defaults = {
 					file_ignore_patterns = { "node_modules" },
 					mappings = {
@@ -78,16 +79,9 @@ return {
 					["ui-select"] = {
 						themes.get_dropdown {},
 					},
-					file_browser = {
-						theme = "dropdown",
-						hijack_netrw = true,
-						cwd_to_path = true,
-						prompt_path = true,
-						path = "%:p:h",
-						mappings = {},
-					},
 				},
-        } end,
+            })
+		end,
 		config = function(_, opts)
 			local telescope = require "telescope"
 			telescope.setup(opts)

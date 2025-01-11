@@ -3,7 +3,17 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		event = { "BufReadPost", "BufNewFile" },
-        priority = 1000,
+		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+		init = function(plugin)
+			-- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
+			-- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which
+			-- no longer trigger the **nvim-treesitter** module to be loaded in time.
+			-- Luckily, the only things that those plugins need are the custom queries, which we make available
+			-- during startup.
+			require("lazy.core.loader").add_to_rtp(plugin)
+			require "nvim-treesitter.query_predicates"
+		end,
+		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 		opts = {
 			ensure_installed = {
 				"lua",
@@ -31,7 +41,7 @@ return {
 			ignore_install = {},
 			highlight = {
 				enable = true,
-				disable = {'tex', 'latex'}, -- Disable highlighting for latex and tex, because they cause huge lag
+				disable = {},
 			},
 			incremental_selection = {
 				enable = true,
@@ -46,12 +56,13 @@ return {
 				enable = true,
 			},
 		},
+		opts_extend = {
+			"highlight.disable",
+			"ensure_installed",
+		},
 		config = function(_, opts)
 			local ts_configs = require "nvim-treesitter.configs"
-
 			ts_configs.setup(opts)
-
-			vim.treesitter.language.register("c_sharp", "mono-cs")
 		end,
 	},
 	{

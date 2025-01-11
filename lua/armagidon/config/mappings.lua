@@ -25,7 +25,8 @@ keymap("n", "u", function()
 	local coords = vim.fn.getpos "."
 	local row = coords[2]
 	local col = coords[3]
-	vim.cmd.undo()
+    pcall(vim.cmd.undo)
+	-- vim.cmd.undo()
 	local height = vim.fn.line "$"
 	if height >= row then
 		vim.api.nvim_win_set_cursor(0, { row, col - 1 })
@@ -36,7 +37,8 @@ keymap("n", "<C-R>", function()
 	local coords = vim.fn.getpos "."
 	local row = coords[2]
 	local col = coords[3]
-	vim.cmd.redo()
+    pcall(vim.cmd.redo)
+	-- vim.cmd.redo()
 	local height = vim.fn.line "$"
 	if height >= row then
 		vim.api.nvim_win_set_cursor(0, { row, col - 1 })

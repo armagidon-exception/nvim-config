@@ -115,7 +115,7 @@ local function export()
 
 	extras.mappings._file_browser = {
 		normal = {
-			F = extras.find_in_directory,
+			-- F = extras.find_in_directory,
 			x = extras.browse_selected_dir,
 		},
 	}
@@ -123,7 +123,7 @@ local function export()
 	extras.mappings._find_files = {
 		normal = {
 			["<C-h>"] = extras.find_hidden_files,
-			F = extras.browse_selected_dir,
+			-- F = extras.browse_selected_dir,
 			g = extras.search_git_files,
 		},
 	}
@@ -162,7 +162,7 @@ return {
 		opts.pickers.find_files.mappings.n = extras.mappings.find_files.normal
 		opts.pickers.find_files.mappings.i = extras.mappings.find_files.insert
 
-		opts.extensions.file_browser.mappings.n = extras.mappings.file_browser.normal
-		opts.extensions.file_browser.mappings.i = extras.mappings.file_browser.insert
+		-- opts.extensions.file_browser.mappings.n = extras.mappings.file_browser.normal
+		-- opts.extensions.file_browser.mappings.i = extras.mappings.file_browser.insert
 	end,
 }

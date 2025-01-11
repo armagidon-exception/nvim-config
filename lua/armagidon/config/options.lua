@@ -65,4 +65,5 @@ g.ft_scroll_ignore = {
 	checkhealth = true,
 	alpha = true,
 	lazy = true,
+    trouble = true,
 }
