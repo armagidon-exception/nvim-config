@@ -44,7 +44,7 @@ require("nvim-surround").buffer_setup {
 			add = function()
 				local input = get_input "Enter the environment: "
 				if input then
-					return { { "\\before{" .. input .. "}" }, { "\\end{" .. input .. "}" } }
+					return { { "\\begin{" .. input .. "}" }, { "\\end{" .. input .. "}" } }
 				end
 			end,
 		},
