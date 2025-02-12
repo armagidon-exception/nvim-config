@@ -16,6 +16,8 @@ return {
 
 		init = function()
 			vim.g.tmux_navigator_no_mappings = 1
+            vim.g.tmux_navigator_no_wrap = 1
+            vim.g.tmux_navigator_preserve_zoom = 1
 		end,
 		config = function()
 			local keymap = vim.keymap.set

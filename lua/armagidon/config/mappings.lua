@@ -25,7 +25,7 @@ keymap("n", "u", function()
 	local coords = vim.fn.getpos "."
 	local row = coords[2]
 	local col = coords[3]
-    pcall(vim.cmd.undo)
+	pcall(vim.cmd.undo)
 	-- vim.cmd.undo()
 	local height = vim.fn.line "$"
 	if height >= row then
@@ -37,7 +37,7 @@ keymap("n", "<C-R>", function()
 	local coords = vim.fn.getpos "."
 	local row = coords[2]
 	local col = coords[3]
-    pcall(vim.cmd.redo)
+	pcall(vim.cmd.redo)
 	-- vim.cmd.redo()
 	local height = vim.fn.line "$"
 	if height >= row then
@@ -77,3 +77,30 @@ end
 
 keymap("n", "<Tab>", next_buffer, { desc = "Go to next tab" })
 keymap("n", "<S-Tab>", prev_buffer, { desc = "Go to previous tab" })
+
+local function splitWindow(vertical)
+	return function()
+		local env = vim.fn.getenv "TMUX"
+		if not env or env == "" then
+			vim.notify("Tmux is not running", vim.log.levels.ERROR)
+		end
+
+		local cwd = vim.fn.getcwd(0, 0)
+		local socket = vim.fn.split(env, ",")
+
+		local cmd
+		if vertical then
+			cmd = string.format("tmux -S %s split-window -h -c %s -t %s", socket[1], cwd, vim.fn.getenv "TMUX_PANE")
+		else
+			cmd = string.format("tmux -S %s split-window -c %s -t %s", socket[1], cwd, vim.fn.getenv "TMUX_PANE")
+		end
+
+		local output = vim.system(vim.fn.split(cmd, " ")):wait()
+		if output.code > 0 then
+			vim.notify(output.stderr, vim.log.levels.ERROR)
+		end
+	end
+end
+
+keymap("n", "<leader>tt", splitWindow(false), { desc = "Open terminal pane in tmux in current directory" })
+keymap("n", "<leader>tvt", splitWindow(true), { desc = "Open terminal vertical pane in tmux in current directory" })
