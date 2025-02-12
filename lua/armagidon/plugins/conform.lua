@@ -3,9 +3,9 @@ return {
 		"zapling/mason-conform.nvim",
 		lazy = true,
 		opts = {
-			ensure_installed = { "stylua", "prettier", "latexindent", "clang-format", "autopep8", "xmlformat" },
+			ensure_installed = { "stylua", "prettier"--[[ , "latexindent" ]], "clang-format", "autopep8", "xmlformat" },
 		},
-        dependencies = { "williamboman/mason.nvim" },
+		dependencies = { "williamboman/mason.nvim" },
 		config = function(_, opts)
 			local masonconform = require "mason-conform"
 			masonconform.setup(opts)
@@ -13,7 +13,7 @@ return {
 	},
 	{
 		"stevearc/conform.nvim",
-        dependencies = {"zapling/mason-conform.nvim"},
+		dependencies = { "zapling/mason-conform.nvim" },
 		event = { "BufReadPre", "BufNewFile", "InsertLeave" },
 		opts = {
 			formatters_by_ft = {
@@ -21,7 +21,7 @@ return {
 				cs = { "clangformat" },
 				python = { "autopep8" },
 				java = { "clangformat" },
-				tex = { "latexindent" },
+				tex = { "tex-fmt" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
 				css = { "prettier" },
