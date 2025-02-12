@@ -8,6 +8,7 @@ return {
 				optional = true,
 				opts = {},
 			},
+            "rafamadriz/friendly-snippets",
 		},
 		version = "v0.*",
 		opts = {
@@ -94,6 +95,7 @@ return {
 		opts_extend = {
 			"sources.default",
 			"sources.compat",
+            "sources.completion.enabled_providers",
 		},
 		config = function(_, opts)
 			-- setup compat sources and provider
