@@ -4,6 +4,7 @@ return {
 		ft = { "latex", "tex" },
 		init = function()
 			vim.g.vimtex_compiler_enabled = 0
+            vim.g.vimtex_mappings_enabled = 0
 		end,
 	},
 	{
