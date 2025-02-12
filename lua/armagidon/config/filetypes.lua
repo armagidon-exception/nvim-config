@@ -22,3 +22,9 @@ vim.filetype.add {
 		end,
 	},
 }
+
+vim.filetype.add {
+	extension = {
+		puml = "plantuml",
+	},
+}

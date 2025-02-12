@@ -63,6 +63,18 @@ return {
 		config = function(_, opts)
 			local ts_configs = require "nvim-treesitter.configs"
 			ts_configs.setup(opts)
+
+			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+			parser_config.plantuml = {
+				install_info = {
+					url = "https://github.com/lyndsysimon/tree-sitter-plantuml.git",
+					files = { "src/parser.c" },
+					branch = "main",
+					generate_requires_npm = false,
+					requires_generate_from_grammar = true,
+				},
+				filetype = "plantuml", -- if filetype does not match the parser name
+			}
 		end,
 	},
 	{
