@@ -1,4 +1,13 @@
 local servers = {
+	texlab = {
+        settings = {
+            texlab = {
+                build = {
+                    args = { "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
+                },
+            }
+        }
+	},
 	lua_ls = {
 		settings = {
 			format = {
@@ -111,7 +120,8 @@ return {
 					local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 					server.capabilities = capabilities
-					-- vim.tbl_deep_extend("force", server.capabilities, capabilities, blink_capabilities)
+					server.capabilities =
+						vim.tbl_deep_extend("force", server.capabilities, capabilities, blink_capabilities)
 					server.handlers = handlers
 					require("lspconfig")[server_name].setup(server)
 				end,
@@ -125,7 +135,31 @@ return {
 		dependencies = { "williamboman/mason-lspconfig.nvim" },
 		config = function(_, opts)
 			vim.api.nvim_create_autocmd("LspAttach", {
-				callback = function(event) end,
+				callback = function(event)
+					local map = function(keys, func, desc, mode)
+						mode = mode or "n"
+						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
+					end
+
+					map("<leader>ld", "<cmd>Telescope lsp_definitions<cr>", "LSP definitions")
+					map("<leader>lr", "<cmd>Telescope lsp_references<cr>", "LSP references")
+					map("<leader>lI", "<cmd>Telescope lsp_implentations<cr>", "LSP implementations")
+					map("<leader>lt", "<cmd>Telescope lsp_type_definitions<cr>", "LSP type definitons")
+					map("<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols")
+					map("<leader>rn", vim.lsp.buf.rename, "LSP rename symbol")
+					-- map("<leader>ca", vim.lsp.buf.code_action, "LSP code actions")
+					map("<leader>gD", vim.lsp.buf.declaration, "Declaration")
+					map("K", vim.lsp.buf.hover, "LSP hover")
+
+					local clients = vim.lsp.get_clients { bufnr = 0 }
+					for _, client in ipairs(clients) do
+						if client.root_dir then
+							vim.cmd.cd(client.root_dir)
+							vim.notify "Root directory was set"
+							break
+						end
+					end
+				end,
 			})
 		end,
 	},
