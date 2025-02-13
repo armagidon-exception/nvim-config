@@ -59,3 +59,5 @@ require("nvim-surround").buffer_setup {
 		},
 	},
 }
+
+keymap("n", "<leader>lb", "<cmd>TexlabBuild<cr>", {desc = "Build latex document"})
