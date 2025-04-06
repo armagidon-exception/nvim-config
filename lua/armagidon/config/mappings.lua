@@ -90,14 +90,24 @@ local function splitWindow(vertical)
 
 		local cmd
 		if vertical then
-			cmd = string.format("tmux -S %s split-window -h -c %s -t %s", socket[1], cwd, vim.fn.getenv "TMUX_PANE")
+			cmd = string.format(
+				"tmux -S %s split-window -h -c %s -t %s",
+				socket[1],
+				vim.fn.fnameescape(vim.fn.fnamemodify(cwd, ":p")),
+				vim.fn.getenv "TMUX_PANE"
+			)
 		else
-			cmd = string.format("tmux -S %s split-window -c %s -t %s", socket[1], cwd, vim.fn.getenv "TMUX_PANE")
+			cmd = string.format(
+				"tmux -S %s split-window -c %s -t %s",
+				socket[1],
+				vim.fn.fnameescape(vim.fn.fnamemodify(cwd, ":p")),
+				vim.fn.getenv "TMUX_PANE"
+			)
 		end
 
-		local output = vim.system(vim.fn.split(cmd, " ")):wait()
-		if output.code > 0 then
-			vim.notify(output.stderr, vim.log.levels.ERROR)
+		local output = vim.fn.system(cmd)
+		if vim.v.shell_error > 0 then
+			vim.notify(output, vim.log.levels.ERROR)
 		end
 	end
 end
