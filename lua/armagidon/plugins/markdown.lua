@@ -6,6 +6,7 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-tree/nvim-web-devicons",
+			"saghen/blink.cmp",
 		},
 		config = function()
 			vim.api.nvim_create_autocmd({ "BufFilePost", "BufNew", "BufNewFile", "FileType" }, {
@@ -24,7 +25,12 @@ return {
 				end,
 			})
 			require("markview").setup {
-				hybrid_modes = { "n", "v", "c" },
+				preview = {
+					enable = true,
+					modes = { "n", "no", "c" },
+					hybrid_modes = {},
+					splitview_winopts = { split = "left" },
+				},
 			}
 		end,
 	},
