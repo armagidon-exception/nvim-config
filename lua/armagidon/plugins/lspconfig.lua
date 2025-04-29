@@ -1,12 +1,12 @@
 local servers = {
 	texlab = {
-        settings = {
-            texlab = {
-                build = {
-                    args = { "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
-                },
-            }
-        }
+		settings = {
+			texlab = {
+				build = {
+					args = { "-xelatex", "-interaction=nonstopmode", "-synctex=1", "%f" },
+				},
+			},
+		},
 	},
 	lua_ls = {
 		settings = {
@@ -80,6 +80,13 @@ local servers = {
 			},
 		},
 	},
+	tinymist = {
+		settings = {
+			projectResolution = "lockDatabase",
+			formatterMode = "typstyle",
+			exportPdf = "never",
+		},
+	},
 }
 
 local handlers = {
@@ -103,7 +110,6 @@ return {
 				"cmake",
 				"docker_compose_language_service",
 				"jsonls",
-				"pylsp",
 				"taplo",
 				"texlab",
 				"ts_ls",
@@ -114,6 +120,9 @@ return {
 			opts.handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}
+					if type(server) == "function" then
+						server = server()
+					end
 					server.capabilities = server.capabilities or {}
 					server.handlers = server.handlers or {}
 					local blink_capabilities = require("blink.cmp").get_lsp_capabilities()

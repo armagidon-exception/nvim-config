@@ -4,7 +4,7 @@ local tools = {
 	"stylua",
 	"shfmt",
 	"taplo",
-	"typstfmt",
+	"typstyle",
 	"hadolint",
 	"shellcheck",
 	"selene",

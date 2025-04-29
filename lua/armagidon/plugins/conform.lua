@@ -3,7 +3,14 @@ return {
 		"zapling/mason-conform.nvim",
 		lazy = true,
 		opts = {
-			ensure_installed = { "stylua", "prettier"--[[ , "latexindent" ]], "clang-format", "autopep8", "xmlformat" },
+			ensure_installed = {
+				"stylua",
+				"prettier" --[[ , "latexindent" ]],
+				"clang-format",
+				"autopep8",
+				"xmlformat",
+				"typstyle",
+			},
 		},
 		dependencies = { "williamboman/mason.nvim" },
 		config = function(_, opts)
@@ -18,9 +25,9 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
-				cs = { "clangformat" },
+				cs = { "clang-format" },
 				python = { "autopep8" },
-				java = { "clangformat" },
+				java = { "clang-format" },
 				tex = { "tex-fmt" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
@@ -32,10 +39,13 @@ return {
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 				xml = { "xmlformat" },
+				sql = { "pg_format", "sql_formatter", "sqlfmt", "sleek", stop_after_first = true },
+				typst = { "typstyle" },
 				["_"] = { "trim_whitespace" },
 			},
 			formatters = {
 				stylua = { prepend_args = { "--quote-style", "ForceDouble", "--call-parentheses", "None" } },
+				typstyle = { prepend_args = { "--column", "80" } },
 			},
 		},
 		config = function(_, opts)
