@@ -104,7 +104,6 @@ return {
 				"lua_ls",
 				"clangd",
 				"bashls",
-				"pyright",
 				"cssls",
 				"html",
 				"cmake",
