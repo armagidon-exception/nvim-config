@@ -114,28 +114,38 @@ return {
 				"ts_ls",
 				"yamlls",
 			},
+			automatic_enable = false,
 		},
 		config = function(_, opts)
-			opts.handlers = {
-                rust_analyzer = function () end,
-				function(server_name)
-					local server = servers[server_name] or {}
-					if type(server) == "function" then
-						server = server()
-					end
-					server.capabilities = server.capabilities or {}
-					server.handlers = server.handlers or {}
-					local blink_capabilities = require("blink.cmp").get_lsp_capabilities()
-					local capabilities = vim.lsp.protocol.make_client_capabilities()
+			local default_handler = function(server_name)
+				local server = servers[server_name] or {}
+				if type(server) == "function" then
+					server = server()
+				end
+				server.capabilities = server.capabilities or {}
+				server.handlers = server.handlers or {}
+				local blink_capabilities = require("blink.cmp").get_lsp_capabilities()
+				local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-					server.capabilities = capabilities
-					server.capabilities =
-						vim.tbl_deep_extend("force", server.capabilities, capabilities, blink_capabilities)
-					server.handlers = handlers
-					require("lspconfig")[server_name].setup(server)
-				end,
+				server.capabilities = capabilities
+				server.capabilities =
+					vim.tbl_deep_extend("force", server.capabilities, capabilities, blink_capabilities)
+				server.handlers = handlers
+				require("lspconfig")[server_name].setup(server)
+			end
+			local mason = require "mason-lspconfig"
+			mason.setup(opts)
+
+			local server_handlers = {
+				rust_analyzer = function() end,
 			}
-			require("mason-lspconfig").setup(opts)
+			for i, server in ipairs(mason.get_installed_servers()) do
+				if not server_handlers[server] then
+					default_handler(server)
+				else
+					server_handlers[server]()
+				end
+			end
 		end,
 	},
 	{
