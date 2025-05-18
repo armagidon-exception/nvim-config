@@ -117,6 +117,7 @@ return {
 		},
 		config = function(_, opts)
 			opts.handlers = {
+                rust_analyzer = function () end,
 				function(server_name)
 					local server = servers[server_name] or {}
 					if type(server) == "function" then
